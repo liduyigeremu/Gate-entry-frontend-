@@ -16,6 +16,6 @@ Set up the main background color as fuchsia-50 or #fdf4ff
 @theme {
   --font-sans: "Roboto", sans-serif;
   --font-datatype: "DataType", sans-serif;
-  --color-primary: #86198f;
-  --color-primary-bg: #fdf4ff;
+  --color-primary: #872f89;
+  --color-primary-bg: #fcf8fe;
 }

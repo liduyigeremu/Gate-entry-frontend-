@@ -4,7 +4,15 @@ export default function Home() {
   return (
     <div >
       <Link href={'/login'}>
-        Login
+        Log in
+      </Link>
+      <br></br>
+      <Link href={'/signup'}>
+        Sign Up
+      </Link>
+      <br></br>
+      <Link href={'/status'}>
+        Go Dashboard
       </Link>
     </div>
   );
