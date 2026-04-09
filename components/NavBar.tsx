@@ -15,7 +15,7 @@ const NavBar = () => {
     const navLinks = [
         { title: 'Status', href: '/status' },
         { title: 'Devices', href: '/' },
-        { title: 'Profile', href: '/' },
+        { title: 'Profile', href: '/profile' },
     ];
 
   return (
@@ -25,7 +25,7 @@ const NavBar = () => {
         text-lg font-bold text-primary min-w-30">
             Device Entry Portal
         </h1>
-
+-
         <nav className="nav-links
         font-bold flex min-w-fit justify-between
         md:max-w-70 md:w-full
