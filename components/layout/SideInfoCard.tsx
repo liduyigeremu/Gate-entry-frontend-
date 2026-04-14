@@ -5,7 +5,7 @@ SideinfoBox component - server side
 import Image from "next/image";
 import sidePic from "@/public/images/sideinfo-box.png";
 
-const SideInfoBox = () => {
+const SideInfoCard = () => {
   return (
     <div className="hidden-left-side
     hidden w-1/2 h-full p-5 pr-0 items-center justify-end
@@ -45,4 +45,4 @@ const SideInfoBox = () => {
   )
 }
 
-export default SideInfoBox;
+export default SideInfoCard;

@@ -13,8 +13,8 @@ import { usePathname } from "next/navigation";
 const NavBar = () => {
     const currentPath = usePathname();
     const navLinks = [
-        { title: 'Status', href: '/status' },
-        { title: 'Devices', href: '/' },
+        { title: 'Status', href: '/' },
+        { title: 'Devices', href: '/devices' },
         { title: 'Profile', href: '/' },
     ];
 
