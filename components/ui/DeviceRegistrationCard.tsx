@@ -3,6 +3,7 @@
 import SubmitBtn from "./SubmitBtn";
 import CustomListBox from "./CustomListBox";
 import CustomImageDropzone from "./CustomImageDropzone";
+import { Camera, Info } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { deviceRegisterSchema, type RegisterDeviceInput } from "@/schemas/deviceRegister.schema";
@@ -36,8 +37,16 @@ const DeviceRegistrationCard = () => {
       onSubmit={handleSubmit(onSubmit)}
       className="device-register-form
       min-w-fit w-full h-fit">
+        <div className="instruct-label
+        text-md font-bold flex w-full py-2 justify-center">
+            <div className="size-5 bg-fuchsia-100 p-0.5 mr-2 rounded-full">
+              <Info className="size-full text-primary" />
+            </div>
+            Devices Details
+          </div>
 
-        <div className="flex w-full h-fit">
+        <div className="text-field
+        flex w-full h-fit">
 
           <div className="flex flex-col w-1/2 pr-4">
 
@@ -131,11 +140,17 @@ const DeviceRegistrationCard = () => {
         </div>
 
         <div className="pic-field
-        flex flex-col w-full h-fit px-4 py-4 items-center">
-          <div className="font-semibold text-sm w-fit pb-4 tracking-wider">
-            PHOTO VERIFICATION
+        flex flex-col w-full h-fit px-4 py-2 items-center">
+
+          <div className="instruct-label
+          text-md font-bold flex w-full py-2 justify-center">
+            <div className="size-5 bg-fuchsia-100 p-0.5 mr-2 rounded-full">
+              <Camera className="size-full text-primary" />
+            </div>
+            Photo Verification
           </div>
-          <div className="flex w-full justify-center">
+          <div className="img-inputs
+          flex w-full justify-center">
             
             <div className="flex flex-col mr-3 items-center">
               <CustomImageDropzone
