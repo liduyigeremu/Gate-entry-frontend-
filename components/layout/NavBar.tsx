@@ -22,7 +22,7 @@ const NavBar = () => {
     <div className="bg-white sticky flex top-0 w-full h-15 items-center justify-between shadow-md">
 
         <h1 className="title-text
-        text-lg font-bold text-primary min-w-30">
+        text-lg font-bold text-primary min-w-30 px-4">
             Device Entry Portal
         </h1>
 

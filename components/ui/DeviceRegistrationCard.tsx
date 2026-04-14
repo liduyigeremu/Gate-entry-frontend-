@@ -28,10 +28,15 @@ const DeviceRegistrationCard = () => {
   }
 
   return (
-    <form noValidate
-    onSubmit={handleSubmit(onSubmit)}
-    className="device-register-form
-    min-w-fit w-full h-fit bg-white rounded-4xl shadow-md p-4">
+    <div className="bg-white flex min-w-fit w-full items-center justify-center rounded-4xl shadow-md p-5 duration-200
+    md:w-180
+    lg:min-w-fit lg:w-full lg:max-w-200">
+      
+      <form noValidate
+      onSubmit={handleSubmit(onSubmit)}
+      className="device-register-form
+      min-w-fit w-full h-fit">
+
         <div className="flex w-full h-fit">
 
           <div className="flex flex-col w-1/2 pr-4">
@@ -48,7 +53,7 @@ const DeviceRegistrationCard = () => {
                     {errors.laptopBrand.message}
                 </div>
                 }
-                       
+                      
             <label
             htmlFor="model"
             className="model-label
@@ -167,7 +172,10 @@ const DeviceRegistrationCard = () => {
         isDisable={isSubmitting ? true : false}
         />
 
-    </form>
+      </form>
+      
+    </div>
+    
   )
 }
 

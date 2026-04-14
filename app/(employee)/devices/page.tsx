@@ -1,9 +1,21 @@
 
+import DevicesSideCard from "@/components/layout/DevicesSideCard";
 import DeviceRegistrationCard from "@/components/ui/DeviceRegistrationCard"
 
 const page = () => {
   return (
-      <DeviceRegistrationCard />
+      <>
+      <div className="devices-side-Card hidden
+      w-full h-full items-center justify-center
+      lg:flex lg:flex-col lg:w-2/5">
+        <DevicesSideCard />
+      </div>
+
+      <div className="flex w-full h-full items-center justify-center p-5
+      lg:w-3/5">
+        <DeviceRegistrationCard />
+      </div>
+      </> 
   )
 }
 
