@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-import { CalendarClock, CirclePlus, Settings, Trash2 } from 'lucide-react'
+import { Archive, CalendarClock, CirclePlus, Laptop, Settings, Trash2 } from 'lucide-react'
 
 interface DeviceData {
   id: string
@@ -80,8 +80,7 @@ const StatusCard = () => {
               </div>
 
               <div className="relative bg-primary rounded-2xl p-6 text-white overflow-hidden">
-           <Image src="/container.png" alt="" width={160} height={160} className="absolute -bottom-10 -right-10 opacity-40"/>
-
+               <Archive className="w-50 h-50 absolute -bottom-20 -right-10 opacity-40" />
                 <p className="text-xs uppercase">Quick Action</p>
                 <h3 className="text-xl font-bold mt-1">Register New Asset</h3>
 
@@ -115,7 +114,7 @@ const StatusCard = () => {
 
                     <div className="flex-1 flex items-center gap-4 p-6">
                       <div className="bg-[#fdcbf64c] p-3 rounded">
-                        <Image src="/laptop.png" alt="" width={40} height={40} />
+                       <Laptop className="w-7 h-7 stroke-2 text-primary" />
                       </div>
 
                       <div>
