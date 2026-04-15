@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
+import { CalendarClock, CirclePlus, Settings, Trash2 } from 'lucide-react'
 
 interface DeviceData {
   id: string
@@ -13,23 +14,23 @@ interface DeviceData {
 const statusConfig = {
   approved: {
     label: 'Approved',
-    styles: 'bg-green-100 text-green-700',
-    dot: 'bg-green-600',
+    styles: 'bg-[#D3EE76] text-[#171E00]',
+    dot: 'bg-[#495B00]',
   },
   pending: {
     label: 'Pending Approval',
-    styles: 'bg-purple-100 text-purple-700',
-    dot: 'bg-purple-600',
+    styles: 'bg-[#FDCBF6] text-[#795277]',
+    dot: 'bg-[#795277]',
   },
   rejected: {
     label: 'Rejected',
-    styles: 'bg-red-100 text-red-700',
-    dot: 'bg-red-600',
+    styles: 'bg-[#DD5B5B] text-[#50434E]',
+    dot: 'bg-[#8D0A0A]',
   },
   active: {
     label: 'Active',
-    styles: 'bg-purple-100 text-purple-700',
-    dot: 'bg-purple-600',
+    styles: 'bg-[#FFD6F8] text-[#37003B]',
+    dot: 'bg-[#872F89]',
   },
 }
 const Status = () => {
@@ -65,7 +66,10 @@ const Status = () => {
             <div className="w-full lg:w-1/3 flex flex-col gap-6">
 
                 <div className="bg-white rounded-2xl shadow p-8">                
-                <Image src="/review.png" alt="" width={28} height={30} className="mb-4" />
+                          <div className="flex items-center justify-center w-5 h-5 mr-1 text-primary">
+                            <CalendarClock className="size-full stroke-2" />
+                            </div>
+               
                 <p className="text-xs uppercase text-[#50434e]">In Review</p>
                 <h2 className="text-3xl font-bold text-primary">
                   2 Devices
@@ -81,9 +85,10 @@ const Status = () => {
                 <p className="text-xs uppercase">Quick Action</p>
                 <h3 className="text-xl font-bold mt-1">Register New Asset</h3>
 
-                <button className="mt-4 flex items-center gap-2 bg-white text-primary px-4 py-2 rounded-xl font-bold">
-                  <Image src="/add.png" alt="" width={20} height={20} />
-                  Start Enrollment
+                <button className="mt-4 flex items-center gap-2 bg-white text-primary px-4 py-2 rounded-3xl font-bold">
+                           <div className="flex items-center justify-center w-5 h-5 mr-1 text-primary">
+                            <CirclePlus className="size-full stroke-2" />
+                            </div>  Start Enrollment
                 </button>
               </div>
             </div>
@@ -137,12 +142,12 @@ const Status = () => {
                     <div className="flex-1 flex justify-center">
                       {device.status === 'active' ? (
                         <div className="flex gap-2">
-                          <button className="p-2 bg-gray-100 rounded">
-                            <Image src="/setting.png" alt="" width={20} height={20} />
-                          </button>
-                          <button className="p-2 bg-gray-100 rounded">
-                            <Image src="/delete.png" alt="" width={20} height={20} />
-                          </button>
+                          <button className="p-2 bg-gray-100 rounded-full flex items-center justify-center">
+                       <Settings className="w-5 h-5 stroke-2" />
+                         </button>
+                          <button className="p-2 bg-gray-100 rounded-full flex items-center justify-center">
+                       <Trash2 className="w-5 h-5 stroke-2" />
+                         </button>
                         </div>
                       ) : (
                         <button className="text-xs font-bold text-primary">
