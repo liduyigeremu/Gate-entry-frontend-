@@ -13,8 +13,8 @@ import { usePathname } from "next/navigation";
 const NavBar = () => {
     const currentPath = usePathname();
     const navLinks = [
-        { title: 'Status', href: '/status' },
-        { title: 'Devices', href: '/' },
+        { title: 'Status', href: '/' },
+        { title: 'Devices', href: '/devices' },
         { title: 'Profile', href: '/' },
     ];
 
@@ -22,7 +22,7 @@ const NavBar = () => {
     <div className="bg-white sticky flex top-0 w-full h-15 items-center justify-between shadow-md">
 
         <h1 className="title-text
-        text-lg font-bold text-primary min-w-30">
+        text-lg font-bold text-primary min-w-30 px-4">
             Device Entry Portal
         </h1>
 
@@ -37,10 +37,10 @@ const NavBar = () => {
 
                 return (
                     <Link key={link.title} href={link.href}
-                    className={`px-2 duraion-200
+                    className={`px-2
                     ${isActive
                     ? 'text-primary border-b-2 pointer-events-none'
-                    : 'hover:text-primary hover:duration-00 active:opacity-60'}`}>
+                    : 'hover:text-primary active:opacity-60'}`}>
                         {link.title}
                     </Link>
                 )

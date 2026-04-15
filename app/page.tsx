@@ -11,7 +11,7 @@ export default function Home() {
         Sign Up
       </Link>
       <br></br>
-      <Link href={'/status'}>
+      <Link href={'/devices'}>
         Go Dashboard
       </Link>
     </div>
