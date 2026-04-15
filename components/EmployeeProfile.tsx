@@ -90,7 +90,7 @@ export default function EmployeeProfile() {
           <div className="bg-white rounded-4xl shadow-md p-8 relative overflow-hidden">
 
             {/* Decorative shape */}
-            <div className="absolute top-0 right-0 w-32 h-32 bg-fuchsia-100 rounded-bl-[100px]" />
+            <div className="absolute top-0 right-0 w-32 h-32 bg-fuchsia-50 rounded-bl-[100px]" />
 
           <div className="flex justify-center mt-4">
   <div className="relative w-28 h-28">
