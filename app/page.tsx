@@ -11,8 +11,12 @@ export default function Home() {
         Sign Up
       </Link>
       <br></br>
-      <Link href={'/status'}>
+      <Link href={'/devices'}>
         Go Dashboard
+      </Link>
+       <br></br>
+      <Link href={'/profile'}>
+        Go profile
       </Link>
     </div>
   );
