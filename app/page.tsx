@@ -14,6 +14,10 @@ export default function Home() {
       <Link href={'/devices'}>
         Go Dashboard
       </Link>
+       <br></br>
+      <Link href={'/profile'}>
+        Go profile
+      </Link>
     </div>
   );
 }

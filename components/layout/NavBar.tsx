@@ -25,7 +25,7 @@ const NavBar = () => {
         text-lg font-bold text-primary min-w-30 px-4">
             Device Entry Portal
         </h1>
-
+-
         <nav className="nav-links
         font-bold flex min-w-fit justify-between
         md:max-w-70 md:w-full
