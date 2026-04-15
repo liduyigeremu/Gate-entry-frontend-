@@ -83,7 +83,7 @@ export default function EmployeeProfile() {
       </p>
 
       {/* Layout */}
-      <div className="grid grid-cols-3 gap-8 mt-8">
+     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
 
         {/* LEFT SIDE */}
         <div className="col-span-1">
@@ -145,9 +145,9 @@ export default function EmployeeProfile() {
                   <p className="text-xs text-gray-500 uppercase tracking-wider">
                     Email Address
                   </p>
-                  <p className="text-sm text-gray-800">
-                    Ediniamare@cbe.com.et
-                  </p>
+                  <p className="text-sm text-gray-800 break-all">
+  Ediniamare@cbe.com.et
+</p>
                 </div>
               </div>
             </div>
@@ -160,9 +160,9 @@ export default function EmployeeProfile() {
                   <p className="text-xs text-gray-500 uppercase tracking-wider">
                     Employee ID
                   </p>
-                  <p className="text-sm text-gray-800">
-                    CBE001214
-                  </p>
+                  <p className="text-sm text-gray-800 break-all">
+  CBE001214
+</p>
                 </div>
               </div>
             </div>
