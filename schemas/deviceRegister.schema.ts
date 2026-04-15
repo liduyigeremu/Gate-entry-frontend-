@@ -9,8 +9,10 @@ const maxImageSizeinMB = 5;
 const MAX_FILE_SIZE = maxImageSizeinMB * 1024 * 1024;
 
 export const deviceRegisterSchema = z.object({
-    laptopBrand: z.string()
-        .min(1, "Please select your laptop brand"),
+    deviceType: z.string()
+        .min(1, "Please select your device type"),
+    brand: z.string()
+        .min(1, "Please select your device brand"),
     model: z.string()
         .min(1, "Please fill model"),
     serialNumber: z.string()

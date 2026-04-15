@@ -48,8 +48,9 @@ const CustomImageDropzone = <T extends FieldValues>( {
                 const file = e.dataTransfer.files?.[0];
                 if (file) field.onChange(file);
             }}
-            className={`relative flex flex-col min-w-50 h-50 border-2 border-dashed border-fuchsia-300
+            className={`relative flex flex-col min-w-50 size-50 border-2 border-dashed border-fuchsia-300
             items-center justify-center rounded-4xl
+            md:min-w-60 md:size-60
             ${previewURL && 'border-none'}`}
             >
                 {previewURL

@@ -7,36 +7,54 @@ import { Camera, Info } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { deviceRegisterSchema, type RegisterDeviceInput } from "@/schemas/deviceRegister.schema";
-import { LaptopBrands } from "../lib/constants/brands";
+import { DeviceTypes, DeviceBrands } from "../lib/constants/devices";
+import { useEffect } from "react";
 
 const DeviceRegistrationCard = () => {
+  //initializing RHF
   const {
     register,
     handleSubmit,
     control,
+    watch,
+    setValue,
     formState: { errors, isSubmitting }
   } = useForm<RegisterDeviceInput>({
     resolver: zodResolver(deviceRegisterSchema),
     mode: "onTouched",
     reValidateMode: "onSubmit",
     defaultValues: {
-      laptopBrand: "",
+      deviceType: "laptop",
+      brand: "",
     }
-  })
+  });
+
+  //use watch() to get the current selected deviceType and reset the brand value upon changing
+  const selectedDeviceType = watch("deviceType");
+
+  useEffect(() => {
+    setValue("brand", "");
+  }, [selectedDeviceType, setValue])
 
   const onSubmit = async (data: RegisterDeviceInput) => {
-    
+    console.log("submitted data:", data)
   }
 
+  //save the currently selected brand lists on currentBrands, to use for ListBox props
+  const currentBrands = selectedDeviceType ? DeviceBrands[selectedDeviceType] : [];
+
   return (
-    <div className="bg-white flex min-w-fit w-full items-center justify-center rounded-4xl shadow-md p-5 duration-200
+    <div className="bg-white flex min-w-fit w-full p-5 items-center justify-center rounded-4xl 
+    shadow-[3px_3px_5px_-3px_rgba(0,0,0,0.5)] duration-200
     md:w-180
     lg:min-w-fit lg:w-full lg:max-w-200">
       
       <form noValidate
       onSubmit={handleSubmit(onSubmit)}
-      className="device-register-form
-      min-w-fit w-full h-fit">
+      className="device-register-form bg-amber-40
+      min-w-fit w-full h-fit
+      md:w-150
+      lg:max-w-170 lg:w-full">
         <div className="instruct-label
         text-md font-bold flex w-full py-2 justify-center">
             <div className="size-5 bg-fuchsia-100 p-0.5 mr-2 rounded-full">
@@ -48,25 +66,35 @@ const DeviceRegistrationCard = () => {
         <div className="text-field
         flex w-full h-fit">
 
-          <div className="flex flex-col w-1/2 pr-4">
+          <div className="left-side-field
+          flex flex-col w-1/2 pr-4">
 
             <CustomListBox
-            name="laptopBrand"
-            label="LAPTOP BRAND"
+            name="deviceType"
+            label="DEVICE TYPE"
             control={control}
-            options={LaptopBrands}
-            placeholder="Select your laptop brand"
+            options={DeviceTypes}
+            placeholder="Select your device type"
             />
-            {errors.laptopBrand
+          
+            <CustomListBox
+            name="brand"
+            label="BRAND"
+            control={control}
+            options={currentBrands}
+            placeholder="Select your device brand"
+            />
+            {errors.brand
             && <div className="text-red-500 text-sm w-full pl-6">
-                    {errors.laptopBrand.message}
+                    {errors.brand.message}
                 </div>
                 }
                       
             <label
             htmlFor="model"
             className="model-label
-            font-semibold text-sm w-fit py-2 tracking-wider">
+            font-semibold text-sm w-fit py-1 tracking-wider
+            md:py-2">
               MODEL
             </label>
             <input {...register("model")}
@@ -74,41 +102,52 @@ const DeviceRegistrationCard = () => {
             type="text"
             placeholder="e.g. MacBook Pro M3"
             className="model-input
-            w-full py-3 px-6 border-2 border-gray-200 rounded-4xl placeholder-gray-500
-            focus:outline-none focus:border-fuchsia-200"
+            w-full py-2 px-4 border-2 border-gray-200 rounded-4xl placeholder-gray-500
+            focus:outline-none focus:border-fuchsia-200
+            md:py-3 md:px-6"
             />
             {errors.model
-            && <div className="text-red-500 text-sm w-full pl-6">
+            && <div className="text-red-500 text-sm w-full text-center">
                     {errors.model.message}
                 </div>
                 }
 
+          </div>
+          <div className="right-side-field
+          flex flex-col w-1/2 pl-4">
+
             <label
             htmlFor="serialNumber"
             className="serial-number-label
-            font-semibold text-sm flex w-fit py-2 tracking-wider">
+            font-semibold text-sm flex w-fit py-1 tracking-wider
+            md:py-2">
               SERIAL NUMBER
             </label>
             <input {...register("serialNumber")}
             id="serialNumber"
             type="text"
             placeholder="e.g. SN-8293-XAQ-2024"
-            className="w-full py-3 px-6 border-2 border-gray-200 rounded-4xl placeholder-gray-500
-            focus:outline-none focus:border-fuchsia-200"
+            className="w-full py-2 px-4 border-2 border-gray-200 rounded-4xl placeholder-gray-500
+            focus:outline-none focus:border-fuchsia-200
+            md:py-3 md:px-6"
             />
             {errors.serialNumber
             && <div className="text-red-500 text-sm w-full pl-6">
                     {errors.serialNumber.message}
                 </div>
                 }
-
-          </div>
-          <div className="flex flex-col w-1/2 pl-4">
-
+            
+            {/*
+            if macAddress and assetTag to be render on deviceType
+            for now render for laptop only to demonstrate the function
+            */}
+            {selectedDeviceType === "laptop" && 
+            <>
             <label
             htmlFor="macAddress"
             className="mac-address-label
-            font-semibold text-sm w-fit py-2 tracking-wider">
+            font-semibold text-sm w-fit py-1 tracking-wider
+            md:py-2">
               MAC ADDRESS
             </label>
             <input {...register("macAddress")}
@@ -116,14 +155,16 @@ const DeviceRegistrationCard = () => {
             type="text"
             placeholder="e.g. 00:00:00:00:00:00"
             className="mac-address-input
-            w-full py-3 px-6 border-2 border-gray-200 rounded-4xl placeholder-gray-500
-            focus:outline-none focus:border-fuchsia-200"
+            w-full py-2 px-4 border-2 border-gray-200 rounded-4xl placeholder-gray-500
+            focus:outline-none focus:border-fuchsia-200
+            md:py-3 md:px-6"
             />
 
             <label
             htmlFor="assetTag"
             className="asset-tag-label
-            font-semibold text-sm w-fit py-2 tracking-wider">
+            font-semibold text-sm w-fit py-1 tracking-wider
+            md:py-2">
               ASSET TAG
             </label>
             <input {...register("assetTag")}
@@ -131,9 +172,12 @@ const DeviceRegistrationCard = () => {
             type="text"
             placeholder="e.g. sAURA-2024-001"
             className="asset-tag-input
-            w-full py-3 px-6 border-2 border-gray-200 rounded-4xl placeholder-gray-500
-            focus:outline-none focus:border-fuchsia-200"
+            w-full py-2 px-4 border-2 border-gray-200 rounded-4xl placeholder-gray-500
+            focus:outline-none focus:border-fuchsia-200
+            md:py-3 md:px-6"
             />
+            </>
+            }
             
           </div>
 

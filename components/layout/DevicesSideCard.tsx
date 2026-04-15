@@ -3,7 +3,7 @@ import { ShieldCheck } from "lucide-react"
 const DevicesSideCard = () => {
     return (
         <div className="devices-side-sard
-        flex flex-col p-5">
+        flex flex-col min-w-50 max-w-100 w-full p-5">
             <div className="bg-fuchsia-200 relative text-black text-xs  flex w-fit p-1 px-4 items-center rounded-4xl">
                 <div className="size-4 mr-2">
                     <ShieldCheck className="size-full" />

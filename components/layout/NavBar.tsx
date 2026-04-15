@@ -37,10 +37,10 @@ const NavBar = () => {
 
                 return (
                     <Link key={link.title} href={link.href}
-                    className={`px-2 duraion-200
+                    className={`px-2
                     ${isActive
                     ? 'text-primary border-b-2 pointer-events-none'
-                    : 'hover:text-primary hover:duration-00 active:opacity-60'}`}>
+                    : 'hover:text-primary active:opacity-60'}`}>
                         {link.title}
                     </Link>
                 )

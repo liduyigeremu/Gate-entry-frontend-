@@ -7,9 +7,9 @@ CustomListBox - client side, reusable ListBox
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from "@headlessui/react";
 import { ChevronDown } from "lucide-react";
 import { Control, Controller, FieldValues, Path } from "react-hook-form";
-import { type SelectOption } from "../lib/constants/brands";
+import { type SelectOption } from "../lib/constants/devices";
 
-interface LaptopBrandsSelectProps<T extends FieldValues, O extends SelectOption> {
+interface CustomListBoxProps<T extends FieldValues, O extends SelectOption> {
     name: Path<T>;
     label: string;
     control: Control<T>;
@@ -23,7 +23,7 @@ const CustomListBox = <T extends FieldValues, O extends SelectOption>( {
     control,
     options,
     placeholder
-}: LaptopBrandsSelectProps<T, O> ) => {
+}: CustomListBoxProps<T, O> ) => {
     return (
         <Controller
         name={name}
@@ -39,22 +39,25 @@ const CustomListBox = <T extends FieldValues, O extends SelectOption>( {
                         <label
                         htmlFor={name}
                         className="laptop-brand-label
-                        font-semibold text-sm w-fit py-2 tracking-wider">
+                        font-semibold text-sm w-fit py-1 tracking-wider
+                        md:py-2">
                         {label}
                         </label>
                         <ListboxButton
                         id={name}
-                        className={`relative text-left w-full py-3 px-6 border-2 rounded-4xl placeholder-gray-500 cursor-pointer z-10
+                        className={`relative text-left text- w-full py-2 px-4 border-2 rounded-4xl placeholder-gray-500 cursor-pointer
                         focus:outline-none focus:border-fuchsia-200
+                        md:py-3 md:px-6
                         ${open
-                        ? "border-fuchsia-200"
+                        ? "border-fuchsia-200 z-10"
                         : "border-gray-200"}`}>
 
                             {selectedOption?.name ?? placeholder}
                             <ChevronDown
                             className={`
-                                absolute text-gray-600 right-3 top-3
+                                absolute text-gray-600 right-3 top-1/3 size-4
                                 transition-transform duration-200
+                                md:size-6 md:top-1/4
                                 ${open ? 'rotate-180' : 'rotate-0'}
                             `}/>
 
@@ -62,7 +65,7 @@ const CustomListBox = <T extends FieldValues, O extends SelectOption>( {
 
                         <div className="relative">
 
-                            <ListboxOptions className="absolute bg-white -top-7 w-full border-x border-b border-gray-200 rounded-b-lg pt-8
+                            <ListboxOptions className="absolute bg-white top-0 w-full border border-gray-200 rounded-lg z-10
                             focus:outline-none">
                                 
                                 {options.map((option) => (
