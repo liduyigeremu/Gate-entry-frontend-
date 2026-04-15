@@ -33,7 +33,7 @@ const statusConfig = {
     dot: 'bg-[#872F89]',
   },
 }
-const Status = () => {
+const StatusCard = () => {
   const [devices] = useState<DeviceData[]>([
     { id: '1', name: 'MacBook Pro M3', serialNumber: 'AP-8829-XQ', submissionDate: 'Mar 12, 2026', status: 'approved' },
     { id: '2', name: 'MacBook Pro M3', serialNumber: 'AP-8829-XQ', submissionDate: 'Mar 12, 2026', status: 'pending' },
@@ -168,4 +168,4 @@ const Status = () => {
   )
 }
 
-export default Status
+export default StatusCard;

@@ -1,5 +1,4 @@
-import Status from '@/components/Status';
-// import Header from '@/components/Header';
+import StatusCard from '@/components/ui/StatusCard';
 const page = () => {
   return (
  
@@ -7,7 +6,7 @@ const page = () => {
     <div className='bg-primary-bg
     flex w-full h-screen items-center justify-center'>
        
-     <Status/>
+     <StatusCard/>
     </div>
     </div>
   )
