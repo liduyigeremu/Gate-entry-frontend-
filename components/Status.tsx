@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
-// import Header from '@/components/Header'
 
 interface DeviceData {
   id: string
@@ -45,13 +44,12 @@ const Status = () => {
     status === 'rejected' ? 'Edit Info' : 'View Details'
 
   return (
-    <div className="w-full min-h-screen bg-[#fcf8fe]">
+    <div className="w-full min-h-screen bg-priamry-bg">
 
-      {/* <Header /> */}
 
       <main className="w-full">
         
-        <div className="max-w-[1440px] mx-auto px-6 flex flex-col gap-16 items-center">
+        <div className="max-w-360 mx-auto px-6 flex flex-col gap-16 items-center">
 
           <section className="w-full text-left">
             <h1 className="text-3xl md:text-5xl font-bold text-[#1c1b1f]">
@@ -69,7 +67,7 @@ const Status = () => {
                 <div className="bg-white rounded-2xl shadow p-8">                
                 <Image src="/review.png" alt="" width={28} height={30} className="mb-4" />
                 <p className="text-xs uppercase text-[#50434e]">In Review</p>
-                <h2 className="text-3xl font-bold text-[#872f89]">
+                <h2 className="text-3xl font-bold text-primary">
                   2 Devices
                 </h2>
                 <p className="text-sm text-[#50434e] mt-2">
@@ -77,13 +75,13 @@ const Status = () => {
                 </p>
               </div>
 
-              <div className="relative bg-[#872f89] rounded-2xl p-6 text-white overflow-hidden">
+              <div className="relative bg-primary rounded-2xl p-6 text-white overflow-hidden">
            <Image src="/container.png" alt="" width={160} height={160} className="absolute -bottom-10 -right-10 opacity-40"/>
 
                 <p className="text-xs uppercase">Quick Action</p>
                 <h3 className="text-xl font-bold mt-1">Register New Asset</h3>
 
-                <button className="mt-4 flex items-center gap-2 bg-white text-[#872f89] px-4 py-2 rounded-xl font-bold">
+                <button className="mt-4 flex items-center gap-2 bg-white text-primary px-4 py-2 rounded-xl font-bold">
                   <Image src="/add.png" alt="" width={20} height={20} />
                   Start Enrollment
                 </button>
@@ -96,7 +94,6 @@ const Status = () => {
                 <h2 className="text-xl font-bold">Hardware Inventory</h2>
               </div>
 
-              {/* Updated Header: all columns are flex-1 for equal space */}
               <div className="flex bg-[#f6f2f87f] text-xs uppercase font-bold text-[#50434e]">
                 <div className="flex-1 p-4">Asset Identity</div>
                 <div className="flex-1 p-4 text-center">Submission</div>
@@ -104,7 +101,6 @@ const Status = () => {
                 <div className="flex-1 p-4 text-center">Action</div>
               </div>
 
-              {/* Rows */}
               {devices.map((device, i) => {
                 const status = statusConfig[device.status]
 
@@ -125,12 +121,10 @@ const Status = () => {
                       </div>
                     </div>
 
-                    {/* Updated Submission Column */}
                     <div className="flex-1 text-center text-sm">
                       {device.submissionDate}
                     </div>
 
-                    {/* Updated Approval Column */}
                     <div className="flex-1 flex justify-center">
                       <div className={`flex items-center gap-2 px-3 py-1 rounded-xl ${status.styles}`}>
                         <div className={`w-2 h-2 rounded-full ${status.dot}`} />
@@ -140,7 +134,6 @@ const Status = () => {
                       </div>
                     </div>
 
-                    {/* Updated Action Column */}
                     <div className="flex-1 flex justify-center">
                       {device.status === 'active' ? (
                         <div className="flex gap-2">
@@ -152,7 +145,7 @@ const Status = () => {
                           </button>
                         </div>
                       ) : (
-                        <button className="text-xs font-bold text-[#872f89]">
+                        <button className="text-xs font-bold text-primary">
                           {getActionText(device.status)}
                         </button>
                       )}
