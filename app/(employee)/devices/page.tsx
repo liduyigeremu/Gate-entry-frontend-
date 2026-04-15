@@ -1,0 +1,22 @@
+
+import DevicesSideCard from "@/components/layout/DevicesSideCard";
+import DeviceRegistrationCard from "@/components/ui/DeviceRegistrationCard"
+
+const page = () => {
+  return (
+      <>
+      <div className="devices-side-Card hidden
+      w-full h-full items-center justify-center
+      lg:flex lg:flex-col lg:w-1/3">
+        <DevicesSideCard />
+      </div>
+
+      <div className="flex w-full h-full items-center justify-center p-5
+      lg:w-2/3">
+        <DeviceRegistrationCard />
+      </div>
+      </> 
+  )
+}
+
+export default page;
