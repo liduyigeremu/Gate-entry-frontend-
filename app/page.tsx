@@ -18,6 +18,10 @@ export default function Home() {
       <Link href={'/profile'}>
         Go profile
       </Link>
+      <br></br>
+      <Link href={'/devicerequest'}>
+        Go DeviceRequest
+      </Link>
     </div>
   );
 }
