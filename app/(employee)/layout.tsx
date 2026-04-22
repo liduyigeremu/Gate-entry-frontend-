@@ -8,7 +8,7 @@ export default function EmployeeLayout({ children }) {
 
       <NavBar />
       
-      <main className="flex w-full h-full items-center justify-center">
+      <main className="flex py-30 md: w-full h-full items-center justify-center">
         {children}
       </main>
       
