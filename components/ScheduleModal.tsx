@@ -188,10 +188,8 @@ export default function ScheduleModal({ open, setOpen, onAssign }: {
       <div className="flex min-h-full items-center justify-center p-3 sm:p-6">
         
         {/* Modal Card */}
-        <div className="bg-white w-full max-w-[1100px] rounded-3xl sm:rounded-[32px] shadow-2xl relative animate-in fade-in zoom-in-95 duration-200">
-          
+<div className="bg-white w-full max-w-[1100px] rounded-3xl sm:rounded-[32px] shadow-2xl relative animate-in fade-in zoom-in-95 duration-200 border-t-4 border-[#872f89]">          
           {/* Purple line at top */}
-          <div className="absolute top-0 left-4 right-4 h-1 bg-[#872f89] rounded-full"></div>
 
           {/* Close Button */}
           <button 

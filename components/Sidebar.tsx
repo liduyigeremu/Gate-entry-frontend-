@@ -55,7 +55,7 @@ export default function Sidebar() {
     // Example: trackPageView(label, href);
   };
 
-  const navItems = [
+  const navItems =[
     {
       icon: <LayoutDashboard size={20} />,
       label: "Dashboard",
@@ -92,7 +92,7 @@ export default function Sidebar() {
         </Link>
       </div>
 
-      <nav className="flex-1 space-y-2 px-4">
+      <nav className="flex-1 space-y-2 px-4 overflow-y-auto">
         {navItems.map((item) => (
           <NavItem
             key={item.href}
@@ -144,15 +144,15 @@ function NavItem({
       <div
         className={`flex items-center gap-3 px-4 py-3 rounded-full cursor-pointer transition-colors ${
           isActive
-            ? "bg-[#872f89] text-white shadow-md"
+            ? "bg-primary text-white shadow-md"
             : "hover:bg-gray-50 text-gray-500 font-medium"
         }`}
       >
-        {icon}
-        <span className={isActive ? "font-semibold" : ""}>{label}</span>
-        {isActive && (
-          <span className="ml-auto text-xs opacity-80">●</span>
-        )}
+        <div className="shrink-0">{icon}</div>
+        {/* whitespace-nowrap prevents the text from breaking into multiple lines */}
+        <span className={`whitespace-nowrap ${isActive ? "font-semibold" : ""}`}>
+          {label}
+        </span>
       </div>
     </Link>
   );
