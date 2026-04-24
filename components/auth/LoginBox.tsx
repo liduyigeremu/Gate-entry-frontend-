@@ -1,7 +1,6 @@
 /*
 LoginBox component - server side
 */
-
 import Link from "next/link";
 import LoginForm from "./LoginForm";
 import { CircleUserRound } from "lucide-react";

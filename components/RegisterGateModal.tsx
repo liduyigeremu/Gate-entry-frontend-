@@ -1,17 +1,19 @@
 // components/RegisterGateModal.tsx
 "use client";
 
-import { X, Plus } from "lucide-react";
+import { X } from "lucide-react";
 import { useState, ChangeEvent, FormEvent } from "react";
 
 interface RegisterFormData {
-  gateName: string;
+  gate_name: string;
   location: string;
+  description: string;
 }
 
 interface FormErrors {
-  gateName?: string;
+  gate_name?: string;
   location?: string;
+  description?: string;
 }
 
 interface RegisterGateModalProps {
@@ -22,16 +24,18 @@ interface RegisterGateModalProps {
 
 export default function RegisterGateModal({ open, setOpen, onGateAdded }: RegisterGateModalProps) {
   const [formData, setFormData] = useState<RegisterFormData>({
-    gateName: "",
+    gate_name: "",
     location: "",
+    description: "",
   });
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<FormErrors>({});
+  const [serverError, setServerError] = useState<string | null>(null);
 
   if (!open) return null;
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { id, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -41,16 +45,20 @@ export default function RegisterGateModal({ open, setOpen, onGateAdded }: Regist
     if (errors[id as keyof FormErrors]) {
       setErrors(prev => ({ ...prev, [id]: undefined }));
     }
+    // Clear server error when user makes changes
+    if (serverError) {
+      setServerError(null);
+    }
   };
 
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
     
     // Validate Gate Name
-    if (!formData.gateName.trim()) {
-      newErrors.gateName = "Gate name is required";
-    } else if (formData.gateName.trim().length < 2) {
-      newErrors.gateName = "Gate name must be at least 2 characters";
+    if (!formData.gate_name.trim()) {
+      newErrors.gate_name = "Gate name is required";
+    } else if (formData.gate_name.trim().length < 2) {
+      newErrors.gate_name = "Gate name must be at least 2 characters";
     }
     
     // Validate Location
@@ -60,8 +68,17 @@ export default function RegisterGateModal({ open, setOpen, onGateAdded }: Regist
       newErrors.location = "Location must be at least 3 characters";
     }
     
+    // Validate Description (optional but validate if provided)
+    if (formData.description && formData.description.trim().length < 3) {
+      newErrors.description = "Description must be at least 3 characters if provided";
+    }
+    
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
+  };
+
+  const getAuthToken = (): string | null => {
+    return localStorage.getItem("authToken");
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -72,31 +89,44 @@ export default function RegisterGateModal({ open, setOpen, onGateAdded }: Regist
     }
     
     setIsSubmitting(true);
+    setServerError(null);
     
-    // Log the data (ready for backend integration)
+    // Get auth token
+    const token = getAuthToken();
+    if (!token) {
+      setServerError("Authentication required. Please log in again.");
+      setIsSubmitting(false);
+      return;
+    }
+    
     console.log("=== Registering New Gate ===");
-    console.log("Gate Name:", formData.gateName);
+    console.log("Gate Name:", formData.gate_name);
     console.log("Location:", formData.location);
+    console.log("Description:", formData.description);
     console.log("============================");
     
-    // Simulate API call
     try {
-      // TODO: Replace with actual Go backend API call
-      // const response = await fetch("http://localhost:8080/api/gates/register", {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify({
-      //     gateName: formData.gateName,
-      //     location: formData.location
-      //   }),
-      // });
+      // Actual Go backend API call
+      const response = await fetch("http://localhost:8080/api/v1/gates", {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          gate_name: formData.gate_name,
+          location: formData.location,
+          description: formData.description || "" // Send empty string if not provided
+        }),
+      });
       
-      // if (!response.ok) throw new Error("Registration failed");
+      const result = await response.json();
       
-      // Simulate network delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      if (!response.ok) {
+        throw new Error(result.message || result.error || "Failed to register gate");
+      }
       
-      console.log("✅ Gate registered successfully!");
+      console.log("✅ Gate registered successfully:", result);
       
       // Call the onGateAdded callback to refresh the data
       if (onGateAdded) {
@@ -108,11 +138,9 @@ export default function RegisterGateModal({ open, setOpen, onGateAdded }: Regist
       handleReset();
       setOpen(false);
       
-      alert("Gate registered successfully!");
-      
-    } catch (error) {
+    } catch (error: any) {
       console.error("❌ Registration error:", error);
-      alert("Failed to register gate. Please try again.");
+      setServerError(error.message || "Failed to register gate. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -120,10 +148,12 @@ export default function RegisterGateModal({ open, setOpen, onGateAdded }: Regist
 
   const handleReset = () => {
     setFormData({
-      gateName: "",
+      gate_name: "",
       location: "",
+      description: "",
     });
     setErrors({});
+    setServerError(null);
   };
 
   const handleClose = () => {
@@ -150,47 +180,53 @@ export default function RegisterGateModal({ open, setOpen, onGateAdded }: Regist
             
             {/* Header */}
             <div>
-              <div className="flex items-center gap-3 mb-2">
-                
-                <h2 className="text-[#872f89] font-bold text-xl">
-                  Register New Gate
-                </h2>
-              </div>
-           
+              <h2 className="text-[#872f89] font-bold text-xl">
+                Register New Gate
+              </h2>
+              <p className="text-sm text-gray-500 mt-1">
+                Add a new gate to the system
+              </p>
             </div>
+
+            {/* Server Error Display */}
+            {serverError && (
+              <div className="bg-red-50 border border-red-200 rounded-lg p-3">
+                <p className="text-red-600 text-sm">{serverError}</p>
+              </div>
+            )}
 
             {/* Input Fields */}
             <div className="space-y-4">
               
               {/* Gate Name */}
               <div className="space-y-1.5">
-                <label htmlFor="gateName" className="text-sm font-medium text-gray-700 flex items-center gap-1.5">
-                  Gate Name 
+                <label htmlFor="gate_name" className="text-sm font-medium text-gray-700 flex items-center gap-1.5">
+                  Gate Name <span className="text-red-500">*</span>
                 </label>
                 <input
-                  id="gateName"
+                  id="gate_name"
                   type="text"
-                  value={formData.gateName}
+                  value={formData.gate_name}
                   onChange={handleInputChange}
-                  placeholder="e.g., GATE 04 - EAST"
-                  className={`w-full px-4 py-3 bg-gray-50 border ${errors.gateName ? 'border-red-500' : 'border-gray-200'} rounded-3xl focus:outline-none focus:ring-2 focus:ring-[#872f89] focus:bg-white transition-all text-sm`}
+                  placeholder="e.g., Main Entrance"
+                  className={`w-full px-4 py-3 bg-gray-50 border ${errors.gate_name ? 'border-red-500' : 'border-gray-200'} rounded-3xl focus:outline-none focus:ring-2 focus:ring-[#872f89] focus:bg-white transition-all text-sm`}
                 />
-                {errors.gateName && (
-                  <p className="text-xs text-red-500 mt-1">{errors.gateName}</p>
+                {errors.gate_name && (
+                  <p className="text-xs text-red-500 mt-1">{errors.gate_name}</p>
                 )}
               </div>
 
               {/* Location */}
               <div className="space-y-1.5">
                 <label htmlFor="location" className="text-sm font-medium text-gray-700 flex items-center gap-1.5">
-                  Location 
+                  Location <span className="text-red-500">*</span>
                 </label>
                 <input
                   id="location"
                   type="text"
                   value={formData.location}
                   onChange={handleInputChange}
-                  placeholder="e.g., East Entrance, Building A"
+                  placeholder="e.g., North Wing, Building A"
                   className={`w-full px-4 py-3 bg-gray-50 border ${errors.location ? 'border-red-500' : 'border-gray-200'} rounded-3xl focus:outline-none focus:ring-2 focus:ring-[#872f89] focus:bg-white transition-all text-sm`}
                 />
                 {errors.location && (
@@ -198,11 +234,35 @@ export default function RegisterGateModal({ open, setOpen, onGateAdded }: Regist
                 )}
               </div>
 
+              {/* Description */}
+              <div className="space-y-1.5">
+                <label htmlFor="description" className="text-sm font-medium text-gray-700 flex items-center gap-1.5">
+                  Description <span className="text-gray-400 text-xs">(Optional)</span>
+                </label>
+                <textarea
+                  id="description"
+                  value={formData.description}
+                  onChange={handleInputChange}
+                  placeholder="Additional details about this gate..."
+                  rows={3}
+                  className={`w-full px-4 py-3 bg-gray-50 border ${errors.description ? 'border-red-500' : 'border-gray-200'} rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#872f89] focus:bg-white transition-all text-sm resize-none`}
+                />
+                {errors.description && (
+                  <p className="text-xs text-red-500 mt-1">{errors.description}</p>
+                )}
+              </div>
+
             </div>
 
             {/* Buttons */}
             <div className="flex gap-3 pt-2">
-             
+              <button 
+                type="button"
+                onClick={handleClose}
+                className="flex-1 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium rounded-3xl transition-colors"
+              >
+                Cancel
+              </button>
               <button 
                 type="submit" 
                 disabled={isSubmitting}

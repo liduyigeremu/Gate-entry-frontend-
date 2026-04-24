@@ -9,14 +9,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="bg-[#faf8fc] flex font-sans min-h-screen">
+   
+      <div className="bg-[#faf8fc] flex font-sans min-h-screen">
         <Sidebar />
         <div className="flex-1 md:ml-64 flex flex-col">
           <Header />
           {children}
         </div>
-      </body>
-    </html>
+      </div>
+   
   );
 }

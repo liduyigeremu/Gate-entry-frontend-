@@ -1,7 +1,6 @@
 /*
 
 */
-
 import * as z from "zod";
 
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp"];
