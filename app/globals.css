@@ -1,21 +1,60 @@
 /*
-Imported two font styles, Roboto and Datatype
+Imported two font styles, Manrope and Datatype
 */
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Datatype:wght@100..900&display=swap');
 @import "tailwindcss";
 
-/*
-Set up Roboto as default font
-Set up Datatype, eg. font-datatype
-Set up the main theme color as fuchsia-800 or #86198f
-Set up the main background color as fuchsia-50 or #fdf4ff
-*/
-
 @theme {
-  --font-sans: "Roboto", sans-serif;
+  /*default font style*/
+  --font-sans: "Manrope", sans-serif;
+
+  /*soon to be deprecated*/
   --font-datatype: "DataType", sans-serif;
-  --color-primary: #872f89;
+  /*soon to be deprecated, use background instead*/
   --color-primary-bg: #fcf8fe;
+
+  /*brand color*/
+  --color-primary: #872f89;
+  --color-accent: #872f89;
+
+  /*page background color*/
+  --color-background: #fcf8fe;
+  /*card background color*/
+  --color-card: #ffffff;
+  /*second level card background color*/
+  --color-card-muted: #f6f2f8;
+
+  /*font color*/
+  --color-foreground: #1c1b1f;
+  /*second level font color*/
+  --color-muted: #50434e;
+
+  /*input background color*/
+  --color-input: #d4c1cf;
+  /*input placeholder font color*/
+  --color-placeholder: #cdc7cc;
+
+  /*icon background color*/
+  --color-icon: #f5ebf5;
+
+  /*status label background*/
+  --color-approved: #d3ee76;
+  --color-pending: #fef9c3;
+  --color-rejected: #dd5b5b;
+
+  /*shadow styles*/
+  --shadow-input: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-button: 0 10px 15px -3px rgb(135 47 137 / 0.3);
+  --shadow-card: 0 20px 50px 0 rgb(163 73 164);
+
+  /*user icon color*/
+  --color-user-icon: #82727f;
+}
+
+@utility label {
+  color: var(--color-muted);
+  font-weight: 700;
+  letter-spacing: 0.075em;
 }
