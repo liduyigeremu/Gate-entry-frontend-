@@ -3,12 +3,15 @@ import NavBar from '@/components/layout/NavBar';
 // @ts-expect-error(children)
 export default function EmployeeLayout({ children }) {
   return (
-    <div className="bg-primary-bg text-gray-600
+    <div className="bg-background
       relative w-full h-screen grid grid-rows-[auto_1fr]">
-
-      <NavBar />
       
-      <main className="flex w-full h-full items-center justify-center">
+      <div className="flex w-full h-15 justify-center
+      lg:mt-4">
+        <NavBar />
+      </div>
+      
+      <main className="flex w-full h-full py-10 items-center justify-center overflow-y-auto">
         {children}
       </main>
       
