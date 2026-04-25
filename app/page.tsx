@@ -11,6 +11,14 @@ export default function Home() {
         Sign Up
       </Link>
       <br></br>
+      <Link href={'/Forget'}>
+        Go Forget
+      </Link>
+      <br></br>
+      <Link href={'/Reset'}>
+        Go Reset
+      </Link>
+      <br></br>
       <Link href={'/devices'}>
         Go Dashboard
       </Link>
