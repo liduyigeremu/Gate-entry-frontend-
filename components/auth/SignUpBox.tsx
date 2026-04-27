@@ -10,13 +10,13 @@ const SignUpBox = () => {
   return (
     <div className="main-right-side
     flex w-full h-full p-5 items-center justify-center
-    lg:w-1/2 lg:pl-0 lg:justify-start">
+    lg:w-1/2 lg:justify-start lg:pl-7">
 
         <div className="login-box
-        bg-white flex flex-col min-w-80 w-full h-fit p-5 items-center justify-center rounded-3xl
-        shadow-[3px_3px_5px_-3px_rgba(0,0,0,0.5)] duration-200
+        bg-card text-muted flex flex-col min-w-80 w-full h-fit p-10 items-center justify-center rounded-3xl
+        shadow-input duration-200
         md:w-3/5 md:min-h-fit
-        lg:w-full lg:max-w-150 lg:h-4/5 lg:rounded-l-none">
+        lg:w-full lg:max-w-150 lg:h-4/5">
 
             <h1 className="login-text
             text-4xl font-medium py-3 justify-center">
@@ -26,14 +26,15 @@ const SignUpBox = () => {
             <div className="profile-container
             flex py-5 justify-center">
                 <div className="profile-icon
-                bg-gray-200 flex w-18 h-18 items-center justify-center rounded-full">
-                    <CircleUserRound className="size-4/5 text-gray-400 stroke-1" />
+                bg-input-auth flex size-14 items-center justify-center rounded-full">
+                    <CircleUserRound className="size-4/5 text-user-icon stroke-1" />
                 </div>
             </div>
 
             <SignUpForm />
             
-            <div className="flex justify-center">
+            <div className="signin-option
+            text-sm flex justify-center">
                 Already have an account?
                 <Link href="/login"
                 className="text-primary font-bold pl-1 cursor-pointer
