@@ -1,4 +1,4 @@
-import GuardManagement from '@/components/GuardTable';
+import GuardManagement from '@/components/ui/guardManagement/GuardTable';
 
 const page = () => {
   return (
