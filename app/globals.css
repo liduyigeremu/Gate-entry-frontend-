@@ -4,6 +4,9 @@ Imported two font styles, Manrope and Datatype
 
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Datatype:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+
+/* Base Tailwind import */
 @import "tailwindcss";
 
 @theme {
