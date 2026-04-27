@@ -38,6 +38,11 @@ Imported two font styles, Manrope and Datatype
   --color-input: #d4c1cf;
   /*input placeholder font color*/
   --color-placeholder: #cdc7cc;
+  /*input focus border color*/
+  --color-input-focus: #f5d0fe;
+  /*input background color for auth*/
+  --color-input-auth: #f7f4f6;
+
 
   /*icon background color*/
   --color-icon: #f5ebf5;

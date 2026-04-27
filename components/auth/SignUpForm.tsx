@@ -1,15 +1,15 @@
 'use client'
 
+/*
+SignUpForm component - client side
+*/
+
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signupSchema, type SignupInput } from "@/schemas/signup.schema";
 import SubmitBtn from "@/components/ui/SubmitBtn";
-import { useState } from "react";
 
 const SignUpForm = () => {
-    const [serverError, setServerError] = useState<string | null>(null);
-    const [success, setSuccess] = useState(false);
-
     const {
         register,
         handleSubmit,
@@ -21,142 +21,139 @@ const SignUpForm = () => {
     });
 
     const onSubmit = async (data: SignupInput) => {
-        setServerError(null);
-        setSuccess(false);
-
-        try {
-            const response = await fetch("http://localhost:8080/auth/register", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    full_name: data.fullname,
-                    email: data.email,
-                    password: data.password,
-                    phone_number: data.phoneNumber,
-                    employee_id: data.employeeId
-                })
-            });
-
-            const result = await response.json();
-
-            if (!response.ok) {
-                throw new Error(result.message || "Registration failed");
-            }
-
-            setSuccess(true);
-            console.log("User registered:", result);
-
-        } catch (error: any) {
-            setServerError(error.message);
-        }
-    };
+        
+    }
 
     return (
-        <form
-            noValidate
-            onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col w-full py-2"
-        >
+        <form noValidate
+        onSubmit={handleSubmit(onSubmit)}
+        className="login-form
+        flex flex-col w-full py-2">
 
-            {/* FULL NAME */}
-            <label className="font-semibold text-sm py-2 tracking-wider">
-                FULL NAME
+            <label
+            htmlFor="fullname"
+            className="name-label
+            text-sm flex w-fit py-2 label">
+                Full Name
             </label>
-            <input
-                {...register("fullname")}
-                type="text"
-                placeholder="Your full name"
-                className="bg-gray-200 p-3 border-2 rounded-md"
-            />
-            {errors.fullname && <p className="text-red-500 text-sm">{errors.fullname.message}</p>}
 
-            {/* EMAIL */}
-            <label className="font-semibold text-sm py-2 tracking-wider">
-                EMAIL
+            <input {...register("fullname")}
+            id="fullname"
+            type="text"
+            placeholder="Your full name"           
+            className="name-input
+            bg-input-auth flex w-full p-3 mb-2 border-2 border-input-auth rounded-md placeholder-placeholder
+            focus:outline-none focus:border-input-auth/50 focus:bg-input-auth/50"
+            />
+            {errors.fullname
+            && <div className="text-red-500 text-sm w-full">
+                    {errors.fullname.message}
+                </div>
+                }
+
+            <label
+            htmlFor="email"
+            className="email-label
+            text-sm flex w-fit py-2 label">
+                Email
             </label>
-            <input
-                {...register("email")}
-                type="email"
-                placeholder="Your email"
-                className="bg-gray-200 p-3 border-2 rounded-md"
-            />
-            {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
 
-            {/* PHONE NUMBER */}
-            <label className="font-semibold text-sm py-2 tracking-wider">
-                PHONE NUMBER
-            </label>
-            <input
-                {...register("phoneNumber")}
-                type="text"
-                placeholder="+1234567890"
-                className="bg-gray-200 p-3 border-2 rounded-md"
+            <input {...register("email")}
+            id="email"
+            type="email"
+            placeholder="Your email address"
+            className="email-input
+            bg-input-auth flex w-full p-3 mb-2 border-2 border-input-auth rounded-md placeholder-placeholder
+            focus:outline-none focus:border-input-auth/50 focus:bg-input-auth/50"
             />
-            {errors.phoneNumber && <p className="text-red-500 text-sm">{errors.phoneNumber.message}</p>}
+            {errors.email
+            && <div className="text-red-500 text-sm w-full">
+                    {errors.email.message}
+                </div>
+                }
 
-            {/* EMPLOYEE ID */}
-            <label className="font-semibold text-sm py-2 tracking-wider">
-                EMPLOYEE ID
-            </label>
-            <input
-                {...register("employeeId")}
-                type="text"
-                placeholder="EMP001"
-                className="bg-gray-200 p-3 border-2 rounded-md"
-            />
-            {errors.employeeId && <p className="text-red-500 text-sm">{errors.employeeId.message}</p>}
+            <div className="password-box
+            flex flex-col w-full">
 
-            {/* PASSWORDS */}
-            <div className="flex gap-3 mt-3">
-                <div className="flex flex-col w-1/2">
-                    <input
-                        {...register("password")}
-                        type="password"
-                        placeholder="Password"
-                        className="bg-gray-200 p-3 border-2 rounded-md"
-                    />
-                    {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
+                <div className="flex w-full">
+
+                    <label
+                    htmlFor="password"
+                    className="password-label
+                    text-sm flex w-1/2 py-2 label">
+                        Password
+                    </label>
+
+                    <label 
+                    htmlFor="confirmPassword"
+                    className="confirm-password-label
+                    text-sm flex w-1/2 py-2 label">
+                        Confirm Password
+                    </label>
+
                 </div>
 
-                <div className="flex flex-col w-1/2">
-                    <input
-                        {...register("confirmPassword")}
+                <div className="flex w-full">
+
+                    <div className="flex flex-col w-1/2 mr-3">
+                        <input {...register("password")}
+                        id="password"
                         type="password"
-                        placeholder="Confirm password"
-                        className="bg-gray-200 p-3 border-2 rounded-md"
-                    />
-                    {errors.confirmPassword && <p className="text-red-500 text-sm">{errors.confirmPassword.message}</p>}
+                        placeholder="Min. 8 characters"
+                        className="password-input
+                        bg-input-auth flex w-full p-3 mb-2 border-2 border-input-auth rounded-md placeholder-placeholder
+            focus:outline-none focus:border-input-auth/50 focus:bg-input-auth/50"
+                        />
+                        {errors.password
+                        && <div className="text-red-500 text-sm w-full">
+                                {errors.password.message}
+                            </div>
+                            }
+                    </div>
+                    
+                    <div className="flex flex-col w-1/2 mr-3">
+                        <input {...register("confirmPassword")}
+                        id="confirmPassword"
+                        type="password"
+                        placeholder="Min. 8 characters"
+                        className="confirm-password-input
+                        bg-input-auth flex w-full p-3 mb-2 border-2 border-input-auth rounded-md placeholder-placeholder
+                        focus:outline-none focus:border-input-auth/50 focus:bg-input-auth/50"
+                        />
+                        {!errors.password && errors.confirmPassword
+                            && <div className="text-red-500 text-sm w-full">
+                                    {errors.confirmPassword.message}
+                                </div>
+                        }
+                    </div>
+
                 </div>
+
             </div>
 
-            {/* TERMS */}
-            <div className="flex items-center py-4 text-sm">
-                <input type="checkbox" required className="mr-2" />
-                <span>I agree to Terms</span>
+            <div className="terms-policy
+            text-sm flex w-full py-3 items-center">
+                
+                <input required
+                id="TermsPolicy"
+                type='checkbox'
+                className='h-4 w-4 ml-0.5 rounded-md accent-accent
+                hover:cursor-pointer'/>
+                <label
+                htmlFor="TermsPolicy"
+                className='pl-2 hover:cursor-pointer'>
+                    I agree to the <span className="text-accent font-bold">Terms of Service</span> and <span className="text-accent font-bold">Security Protocols</span>
+                </label>
+
             </div>
-
-            {/* SERVER ERROR */}
-            {serverError && (
-                <div className="text-red-600 text-sm mb-2">
-                    {serverError}
-                </div>
-            )}
-
-            {/* SUCCESS */}
-            {success && (
-                <div className="text-green-600 text-sm mb-2">
-                    Account created successfully!
-                </div>
-            )}
 
             <SubmitBtn
-                label={isSubmitting ? 'Creating Account...' : 'Create Account'}
-                isDisable={isSubmitting}
+            label={isSubmitting ? 'Creating Portal Account' : 'Create Portal Account'}
+            isDisable={isSubmitting ? true : false}
             />
+            
         </form>
-    );
-};
+    )
+}
 
 export default SignUpForm;
