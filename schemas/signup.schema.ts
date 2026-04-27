@@ -16,6 +16,8 @@ export const signupSchema = z.object({
         .trim()
         .min(1, "Email is Required")
         .email("Invalid email - Please try again"),
+         employeeId: z.string(),
+          phoneNumber: z.string(),
     password: z.string()
         .trim()
         .min(8, "Password must be at least 8 characters")
