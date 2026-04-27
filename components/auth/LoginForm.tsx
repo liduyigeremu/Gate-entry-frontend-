@@ -4,6 +4,7 @@
 LoginForm component - client side
 */
 
+import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema, type LoginInput } from "@/schemas/login.schema";
@@ -33,8 +34,8 @@ const LoginForm = () => {
             <label
             htmlFor="email"
             className="email-label
-            font-semibold text-sm flex w-fit py-2 tracking-wider">
-                EMPLOYEE EMAIL
+            text-sm flex w-fit py-2 label">
+                Employee Email
             </label>
 
             <input {...register("email")}
@@ -42,8 +43,8 @@ const LoginForm = () => {
             type="email"
             placeholder="Your email address"
             className="email-input
-            bg-gray-200 flex w-full p-3 border-2 border-gray-200 rounded-md placeholder-gray-500
-            focus:outline-none focus:border-fuchsia-200 focus:bg-gray-100"
+            bg-input-auth flex w-full p-3 mb-2 border-2 border-input-auth rounded-md placeholder-placeholder
+            focus:outline-none focus:border-input-auth/50 focus:bg-input-auth/50"
             />
             {errors.email
             && <div className="text-red-500 text-sm w-full">
@@ -54,8 +55,8 @@ const LoginForm = () => {
             <label
             htmlFor="password"
             className="password-label
-            font-semibold text-sm flex w-fit py-2 tracking-wider">
-                PASSWORD
+            text-sm flex w-fit py-2 label">
+                Password
             </label>
 
             <input {...register("password")}
@@ -63,8 +64,8 @@ const LoginForm = () => {
             type="password"
             placeholder="Min. 8 characters"
             className="password-input
-            bg-gray-200 flex w-full p-3 border-2 border-gray-200 rounded-md placeholder-gray-500
-            focus:outline-none focus:border-fuchsia-200 focus:bg-gray-100"
+            bg-input-auth flex w-full p-3 mb-2 border-2 border-input-auth rounded-md placeholder-placeholder
+            focus:outline-none focus:border-input-focus focus:bg-gray-100"
             />
             {!errors.email && errors.password
                 && <div className="text-red-500 text-sm w-full">
@@ -72,8 +73,16 @@ const LoginForm = () => {
                     </div>
             }
 
+                <div className="flex w-full justify-end">
+                    <Link href="/"
+                    className="text-accent text-sm font-bold pl-1 cursor-pointer
+                    hover:underline
+                    active:opacity-50"
+                    >Forgot Password?</Link>
+                </div>
+
             <SubmitBtn
-            label={isSubmitting ? 'Signing in' : 'Sign in'}
+            label={isSubmitting ? 'Loging in' : 'Log in'}
             isDisable={isSubmitting ? true : false}
             />
             

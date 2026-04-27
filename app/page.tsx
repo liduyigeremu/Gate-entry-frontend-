@@ -26,6 +26,16 @@ export default function Home() {
       <Link href={'/profile'}>
         Go profile
       </Link>
+       <br></br>
+      <Link href={'/status'}>
+        Device status
+      </Link>
+       <br></br>
+        <Link href={'/GuardManagement'}>
+        Guard Management
+      </Link>
+       <br></br>
+ 
     </div>
   );
 }

@@ -1,13 +1,13 @@
 'use client'
 
-import SubmitBtn from "./SubmitBtn";
-import CustomListBox from "./CustomListBox";
-import CustomImageDropzone from "./CustomImageDropzone";
+import SubmitBtn from "../SubmitBtn";
+import CustomListBox from "@/components/ui/CustomListBox";
+import CustomImageDropzone from "@/components/ui/CustomImageDropzone";
 import { Camera, Info } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { deviceRegisterSchema, type RegisterDeviceInput } from "@/schemas/deviceRegister.schema";
-import { DeviceTypes, DeviceBrands } from "../lib/constants/devices";
+import { DeviceTypes, DeviceBrands } from "@/components/lib/constants/devices";
 import { useEffect } from "react";
 
 const DeviceRegistrationCard = () => {
@@ -44,8 +44,8 @@ const DeviceRegistrationCard = () => {
   const currentBrands = selectedDeviceType ? DeviceBrands[selectedDeviceType] : [];
 
   return (
-    <div className="bg-white flex min-w-fit w-full p-5 items-center justify-center rounded-4xl 
-    shadow-[3px_3px_5px_-3px_rgba(0,0,0,0.5)] duration-200
+    <div className="bg-card flex min-w-fit w-full p-5 items-center justify-center rounded-4xl 
+    shadow-input duration-200
     md:w-180
     lg:min-w-fit lg:w-full lg:max-w-200">
       
@@ -56,9 +56,9 @@ const DeviceRegistrationCard = () => {
       md:w-150
       lg:max-w-170 lg:w-full">
         <div className="instruct-label
-        text-md font-bold flex w-full py-2 justify-center">
-            <div className="size-5 bg-fuchsia-100 p-0.5 mr-2 rounded-full">
-              <Info className="size-full text-primary" />
+        text-md font-bold flex w-full py-3 items-center justify-center">
+            <div className="size-7 bg-icon p-1.5 mr-2 rounded-full">
+              <Info className="size-full text-accent" />
             </div>
             Devices Details
           </div>
@@ -93,7 +93,7 @@ const DeviceRegistrationCard = () => {
             <label
             htmlFor="model"
             className="model-label
-            font-semibold text-sm w-fit py-1 tracking-wider
+            text-xs w-fit py-1 label
             md:py-2">
               MODEL
             </label>
@@ -102,9 +102,9 @@ const DeviceRegistrationCard = () => {
             type="text"
             placeholder="e.g. MacBook Pro M3"
             className="model-input
-            w-full py-2 px-4 border-2 border-gray-200 rounded-4xl placeholder-gray-500
-            focus:outline-none focus:border-fuchsia-200
-            md:py-3 md:px-6"
+            w-full py-2 px-4 border border-input rounded-4xl placeholder-placeholder shadow-input
+            focus:outline-none focus:border-input-focus
+            md:py-3 md:px-6 md:mb-2"
             />
             {errors.model
             && <div className="text-red-500 text-sm w-full text-center">
@@ -119,7 +119,7 @@ const DeviceRegistrationCard = () => {
             <label
             htmlFor="serialNumber"
             className="serial-number-label
-            font-semibold text-sm flex w-fit py-1 tracking-wider
+            text-xs flex w-fit py-1 label
             md:py-2">
               SERIAL NUMBER
             </label>
@@ -127,9 +127,9 @@ const DeviceRegistrationCard = () => {
             id="serialNumber"
             type="text"
             placeholder="e.g. SN-8293-XAQ-2024"
-            className="w-full py-2 px-4 border-2 border-gray-200 rounded-4xl placeholder-gray-500
-            focus:outline-none focus:border-fuchsia-200
-            md:py-3 md:px-6"
+            className="w-full py-2 px-4 border border-input rounded-4xl placeholder-placeholder shadow-input
+            focus:outline-none focus:border-input-focus
+            md:py-3 md:px-6 md:mb-2"
             />
             {errors.serialNumber
             && <div className="text-red-500 text-sm w-full pl-6">
@@ -146,7 +146,7 @@ const DeviceRegistrationCard = () => {
             <label
             htmlFor="macAddress"
             className="mac-address-label
-            font-semibold text-sm w-fit py-1 tracking-wider
+            text-xs flex w-fit py-1 label
             md:py-2">
               MAC ADDRESS
             </label>
@@ -155,15 +155,15 @@ const DeviceRegistrationCard = () => {
             type="text"
             placeholder="e.g. 00:00:00:00:00:00"
             className="mac-address-input
-            w-full py-2 px-4 border-2 border-gray-200 rounded-4xl placeholder-gray-500
-            focus:outline-none focus:border-fuchsia-200
-            md:py-3 md:px-6"
+            w-full py-2 px-4 border border-input rounded-4xl placeholder-placeholder shadow-input
+            focus:outline-none focus:border-input-focus
+            md:py-3 md:px-6 md:mb-2"
             />
 
             <label
             htmlFor="assetTag"
             className="asset-tag-label
-            font-semibold text-sm w-fit py-1 tracking-wider
+            text-xs flex w-fit py-1 label
             md:py-2">
               ASSET TAG
             </label>
@@ -172,9 +172,9 @@ const DeviceRegistrationCard = () => {
             type="text"
             placeholder="e.g. sAURA-2024-001"
             className="asset-tag-input
-            w-full py-2 px-4 border-2 border-gray-200 rounded-4xl placeholder-gray-500
-            focus:outline-none focus:border-fuchsia-200
-            md:py-3 md:px-6"
+            w-full py-2 px-4 border border-input rounded-4xl placeholder-placeholder shadow-input
+            focus:outline-none focus:border-input-focus
+            md:py-3 md:px-6 md:mb-2"
             />
             </>
             }
@@ -187,8 +187,8 @@ const DeviceRegistrationCard = () => {
         flex flex-col w-full h-fit px-4 py-2 items-center">
 
           <div className="instruct-label
-          text-md font-bold flex w-full py-2 justify-center">
-            <div className="size-5 bg-fuchsia-100 p-0.5 mr-2 rounded-full">
+          text-md font-bold flex w-full py-3 items-center justify-center">
+            <div className="size-7 bg-icon p-1.5 mr-2 rounded-full">
               <Camera className="size-full text-primary" />
             </div>
             Photo Verification
