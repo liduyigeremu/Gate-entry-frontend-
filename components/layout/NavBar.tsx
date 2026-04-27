@@ -19,7 +19,7 @@ const NavBar = () => {
     ];
 
   return (
-    <div className="text-muted bg-white flex top-0 w-full px-4 items-center justify-between shadow-md
+    <div className="text-muted bg-card flex top-0 w-full px-4 items-center justify-between shadow-input
     lg:min-w-220 lg:max-w-300 lg:px-4 lg:rounded-2xl">
 
         <h1 className="title-text
