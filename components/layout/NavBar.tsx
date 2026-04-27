@@ -6,8 +6,7 @@ NavBar component - client side
 
 import Link from "next/link";
 import { Bell } from "lucide-react";
-import { CircleQuestionMark } from "lucide-react";
-import { CircleUserRound } from "lucide-react";
+import { CircleQuestionMark, CircleUserRound } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 const NavBar = () => {

@@ -27,7 +27,7 @@ export const deviceRegisterSchema = z.object({
             "Only .jpg, .png, and .webp formats are supported"
         )
         .refine((file) => file.size <= MAX_FILE_SIZE, "Max file size is 5MB"),
-    backImage: z.instanceof(File, { message: "Front Image is required" })
+    backImage: z.instanceof(File, { message: "Back Image is required" })
         .refine(
             (file) => ACCEPTED_IMAGE_TYPES.includes(file.type),
             "Only .jpg, .png, and .webp formats are supported"

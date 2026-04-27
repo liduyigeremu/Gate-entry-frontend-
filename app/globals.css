@@ -28,6 +28,8 @@ Imported two font styles, Manrope and Datatype
   --color-card: #ffffff;
   /*second level card background color*/
   --color-card-muted: #f6f2f8;
+  /*admin side bar background color*/
+  --color-card-side: #f8fafc;
 
   /*font color*/
   --color-foreground: #1c1b1f;
