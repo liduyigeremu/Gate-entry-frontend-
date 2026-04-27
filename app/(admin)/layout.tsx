@@ -1,22 +1,21 @@
-// app/(admin)/layout.tsx
-import Sidebar from "@/components/Sidebar";
-import Header from "@/components/Header";
-import "@/app/globals.css"; // Make sure global styles are imported
+import AdminHeader from "@/components/layout/AdminHeader";
+import AdminSideBar from "@/components/layout/AdminSideBar";
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+// @ts-expect-error(children)
+export default function EmployeeLayout({ children }) {
   return (
-   
-      <div className="bg-[#faf8fc] flex font-sans min-h-screen">
-        <Sidebar />
-        <div className="flex-1 md:ml-64 flex flex-col">
-          <Header />
-          {children}
-        </div>
-      </div>
-   
+    <div className="bg-background text-foreground
+    w-full h-screen
+    grid grid-cols-[auto_1fr] grid-rows-[auto_1fr]">
+
+      <AdminSideBar />
+
+      <AdminHeader />
+
+      <main className="w-full h-full overflow-y-auto">
+        {children}
+      </main>
+
+    </div>
   );
 }

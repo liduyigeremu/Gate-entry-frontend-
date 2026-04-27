@@ -1,13 +1,13 @@
 'use client'
 
-import SubmitBtn from "./SubmitBtn";
-import CustomListBox from "./CustomListBox";
-import CustomImageDropzone from "./CustomImageDropzone";
+import SubmitBtn from "../SubmitBtn";
+import CustomListBox from "@/components/ui/CustomListBox";
+import CustomImageDropzone from "@/components/ui/CustomImageDropzone";
 import { Camera, Info } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { deviceRegisterSchema, type RegisterDeviceInput } from "@/schemas/deviceRegister.schema";
-import { DeviceTypes, DeviceBrands } from "../lib/constants/devices";
+import { DeviceTypes, DeviceBrands } from "@/components/lib/constants/devices";
 import { useEffect } from "react";
 
 const DeviceRegistrationCard = () => {
