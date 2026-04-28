@@ -172,7 +172,7 @@ export default function DeviceEntryPortal() {
   }
 
   return (
-    <div className="flex h-screen min-h-screen w-full bg-[#fcfdff] font-sans text-slate-900 selection:bg-purple-100">
+    <div className="flex h-screen min-h-screen w-full font-sans text-slate-900 selection:bg-purple-100">
       
       {/* Main Content Area - Full width */}
       <div className="flex flex-1 flex-col overflow-hidden">
