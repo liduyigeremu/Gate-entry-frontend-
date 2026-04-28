@@ -27,7 +27,7 @@ export default function LaptopRequests() {
   const limit = 4;
 
   return (
-    <div className="w-full min-h-screen bg-[#f8f9fc]">
+    <div className="w-full min-h-screen">
       {/* 
         The max-w and mx-auto ensures it doesn't stretch infinitely on ultrawide monitors.
         Padding adjusts based on screen size (p-4 on mobile, p-6/8 on larger screens).
@@ -37,7 +37,7 @@ export default function LaptopRequests() {
         {/* --- Top Metric Cards --- */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-10">
           {/* Card 1: Pending */}
-          <div className="bg-white rounded-[24px] p-6 sm:p-8 shadow-sm border border-gray-100 flex flex-col justify-center">
+          <div className="bg-card rounded-[24px] p-6 sm:p-8 shadow-sm border border-gray-100 flex flex-col justify-center">
             <p className="text-[11px] font-bold text-[#872f89] uppercase tracking-widest mb-2 font-manrope">
               Total Pending
             </p>
