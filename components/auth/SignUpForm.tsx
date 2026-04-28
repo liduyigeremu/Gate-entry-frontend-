@@ -5,6 +5,7 @@ SignUpForm component - client side
 */
 
 import { useForm } from "react-hook-form";
+import { UserRound, LockKeyhole, Mail } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signupSchema, type SignupInput } from "@/schemas/signup.schema";
 import SubmitBtn from "@/components/ui/SubmitBtn";
@@ -33,18 +34,26 @@ const SignUpForm = () => {
             <label
             htmlFor="fullname"
             className="name-label
-            font-semibold text-sm flex w-fit py-2 tracking-wider">
-                FULL NAME
+            text-sm flex w-fit py-2 label">
+                Full Name
             </label>
 
-            <input {...register("fullname")}
-            id="fullname"
-            type="text"
-            placeholder="Your full name"           
-            className="name-input
-            bg-gray-200 flex w-full p-3 border-2 border-gray-200 rounded-md placeholder-gray-500
-            focus:outline-none focus:border-fuchsia-200 focus:bg-gray-100"
-            />
+            <div className="relative flex w-full mb-2 items-center">
+                <UserRound className="absolute left-2 text-auth-icon size-5
+                md:left-4
+                lg:left-6"/>
+                <input {...register("fullname")}
+                id="fullname"
+                type="text"
+                placeholder="Your full name"           
+                className="email-input
+                bg-input-auth flex w-full p-3 pl-8 border-2 border-input-auth rounded-md placeholder-placeholder
+                focus:outline-none focus:border-input-auth/50 focus:bg-input-auth/50
+                md:pl-12
+                lg:pl-14"
+                />
+            </div>
+            
             {errors.fullname
             && <div className="text-red-500 text-sm w-full">
                     {errors.fullname.message}
@@ -54,18 +63,27 @@ const SignUpForm = () => {
             <label
             htmlFor="email"
             className="email-label
-            font-semibold text-sm flex w-fit py-2 tracking-wider">
-                EMAIL
+            text-sm flex w-fit py-2 label">
+                Email
             </label>
 
-            <input {...register("email")}
-            id="email"
-            type="email"
-            placeholder="Your email address"
-            className="email-input
-            bg-gray-200 flex w-full p-3 border-2 border-gray-200 rounded-md placeholder-gray-500
-            focus:outline-none focus:border-fuchsia-200 focus:bg-gray-100"
-            />
+            <div className="relative flex w-full mb-2 items-center">
+                <Mail className="absolute left-2 text-auth-icon size-5
+                md:left-4
+                lg:left-6"
+                />
+                <input {...register("email")}
+                id="email"
+                type="email"
+                placeholder="Your email address"
+                className="email-input
+                bg-input-auth flex w-full p-3 pl-8 border-2 border-input-auth rounded-md placeholder-placeholder
+                focus:outline-none focus:border-input-auth/50 focus:bg-input-auth/50
+                md:pl-12
+                lg:pl-14"
+                />
+            </div>
+            
             {errors.email
             && <div className="text-red-500 text-sm w-full">
                     {errors.email.message}
@@ -73,37 +91,47 @@ const SignUpForm = () => {
                 }
 
             <div className="password-box
-            flex flex-col w-full mt-3">
+            flex flex-col w-full">
 
                 <div className="flex w-full">
 
                     <label
                     htmlFor="password"
                     className="password-label
-                    font-semibold text-sm flex w-1/2 pr-3 tracking-wide">
-                        PASSWORD
+                    text-sm flex w-1/2 py-2 mr-2 label">
+                        Password
                     </label>
 
                     <label 
                     htmlFor="confirmPassword"
                     className="confirm-password-label
-                    font-semibold text-sm flex w-1/2 pl-3 tracking-wide">
-                        CONFIRM PASSWORD
+                    text-sm flex w-1/2 py-2 ml-2 label">
+                        Confirm Password
                     </label>
 
                 </div>
 
                 <div className="flex w-full">
 
-                    <div className="flex flex-col w-1/2 mr-3">
-                        <input {...register("password")}
-                        id="password"
-                        type="password"
-                        placeholder="Min. 8 characters"
-                        className="password-input
-                        bg-gray-200 flex w-full p-3 border-2 border-gray-200 rounded-md placeholder-gray-500
-                        focus:outline-none focus:border-fuchsia-200 focus:bg-gray-100"
-                        />
+                    <div className="flex flex-col w-1/2 mr-2">
+
+                        <div className="relative flex w-full mb-2 items-center">
+                            <LockKeyhole className="absolute left-2 text-auth-icon size-5
+                            md:left-4
+                            lg:left-6"
+                            />
+                            <input {...register("password")}
+                            id="password"
+                            type="password"
+                            placeholder="Min. 8 characters"
+                            className="email-input
+                            bg-input-auth flex w-full p-3 pl-8 border-2 border-input-auth rounded-md placeholder-placeholder
+                            focus:outline-none focus:border-input-auth/50 focus:bg-input-auth/50
+                            md:pl-12
+                            lg:pl-14"
+                            />
+                        </div>
+                        
                         {errors.password
                         && <div className="text-red-500 text-sm w-full">
                                 {errors.password.message}
@@ -111,15 +139,25 @@ const SignUpForm = () => {
                             }
                     </div>
                     
-                    <div className="flex flex-col w-1/2 mr-3">
-                        <input {...register("confirmPassword")}
-                        id="confirmPassword"
-                        type="password"
-                        placeholder="Min. 8 characters"
-                        className="confirm-password-input
-                        bg-gray-200 flex w-full p-3  border-2 border-gray-200 rounded-md placeholder-gray-500
-                        focus:outline-none focus:border-fuchsia-200 focus:bg-gray-100"
-                        />
+                    <div className="flex flex-col w-1/2 ml-2">
+                    
+                        <div className="relative flex w-full mb-2 items-center">
+                            <LockKeyhole className="absolute left-2 text-auth-icon size-5
+                            md:left-4
+                            lg:left-6"
+                            />
+                            <input {...register("confirmPassword")}
+                            id="confirmPassword"
+                            type="password"
+                            placeholder="Min. 8 characters"
+                            className="email-input
+                            bg-input-auth flex w-full p-3 pl-8 border-2 border-input-auth rounded-md placeholder-placeholder
+                            focus:outline-none focus:border-input-auth/50 focus:bg-input-auth/50
+                            md:pl-12
+                            lg:pl-14"
+                            />
+                        </div>
+                        
                         {!errors.password && errors.confirmPassword
                             && <div className="text-red-500 text-sm w-full">
                                     {errors.confirmPassword.message}
@@ -132,17 +170,17 @@ const SignUpForm = () => {
             </div>
 
             <div className="terms-policy
-            text-sm flex w-full py-4 items-center">
+            text-sm flex w-full py-3 items-center">
                 
                 <input required
                 id="TermsPolicy"
                 type='checkbox'
-                className='h-4 w-4 rounded-md border-gray-400 border accent-primary
+                className='h-4 w-4 ml-0.5 rounded-md accent-accent
                 hover:cursor-pointer'/>
                 <label
                 htmlFor="TermsPolicy"
                 className='pl-2 hover:cursor-pointer'>
-                    I agree to the <span className="text-primary">Terms of Service</span> and <span className="text-primary">Security Protocols</span>
+                    I agree to the <span className="text-accent font-bold">Terms of Service</span> and <span className="text-accent font-bold">Security Protocols</span>
                 </label>
 
             </div>

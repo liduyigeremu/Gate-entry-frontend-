@@ -39,23 +39,23 @@ const CustomListBox = <T extends FieldValues, O extends SelectOption>( {
                         <label
                         htmlFor={name}
                         className="laptop-brand-label
-                        font-semibold text-sm w-fit py-1 tracking-wider
+                        text-xs w-fit py-1 label
                         md:py-2">
                         {label}
                         </label>
                         <ListboxButton
                         id={name}
-                        className={`relative text-left text- w-full py-2 px-4 border-2 rounded-4xl placeholder-gray-500 cursor-pointer
-                        focus:outline-none focus:border-fuchsia-200
-                        md:py-3 md:px-6
+                        className={`relative text-left text-muted w-full py-2 px-4 border rounded-4xl placeholder-placeholder cursor-pointer shadow-input
+                        focus:outline-none focus:border-input-focus
+                        md:py-3 md:px-6 md:mb-2
                         ${open
-                        ? "border-fuchsia-200 z-10"
-                        : "border-gray-200"}`}>
+                        ? "border-input-focus z-10"
+                        : "border-input"}`}>
 
-                            {selectedOption?.name ?? placeholder}
+                            {selectedOption?.name ?? <span className="text-placeholder">{placeholder}</span>}
                             <ChevronDown
                             className={`
-                                absolute text-gray-600 right-3 top-1/3 size-4
+                                absolute right-3 top-1/3 size-4
                                 transition-transform duration-200
                                 md:size-6 md:top-1/4
                                 ${open ? 'rotate-180' : 'rotate-0'}
@@ -65,7 +65,7 @@ const CustomListBox = <T extends FieldValues, O extends SelectOption>( {
 
                         <div className="relative">
 
-                            <ListboxOptions className="absolute bg-white top-0 w-full border border-gray-200 rounded-lg z-10
+                            <ListboxOptions className="absolute bg-white top-0 w-full py-1 border border-input rounded-lg z-10
                             focus:outline-none">
                                 
                                 {options.map((option) => (

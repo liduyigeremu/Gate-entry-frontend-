@@ -22,4 +22,4 @@ const DevicesSideCard = () => {
     )
 }
 
-export default DevicesSideCard
+export default DevicesSideCard;

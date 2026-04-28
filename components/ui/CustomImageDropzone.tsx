@@ -48,9 +48,9 @@ const CustomImageDropzone = <T extends FieldValues>( {
                 const file = e.dataTransfer.files?.[0];
                 if (file) field.onChange(file);
             }}
-            className={`relative flex flex-col min-w-50 size-50 border-2 border-dashed border-fuchsia-300
+            className={`relative flex flex-col min-w-50 aspect-4/3 border-2 border-dashed border-accent/20
             items-center justify-center rounded-4xl
-            md:min-w-60 md:size-60
+            md:min-w-60
             ${previewURL && 'border-none'}`}
             >
                 {previewURL
@@ -65,20 +65,20 @@ const CustomImageDropzone = <T extends FieldValues>( {
                         type="button"
                         onClick={() => field.onChange(undefined)}
                         aria-label="Remove Image"
-                        className="bg-white/70 absolute flex top-3 right-3 size-7 p-1 rounded-full duration-200
-                        hover:bg-white"
+                        className="bg-card/70 absolute flex top-3 right-3 size-7 p-1 rounded-full cursor-pointer duration-200
+                        hover:bg-card"
                         >
                             <X  className="size-full text-primary"/>
                         </button>
                         </>
                     :   <>
-                        <div className="size-10 p-2 bg-fuchsia-100 rounded-full">
-                        <FileUp className="size-full text-primary" />
+                        <div className="size-10 p-2 bg-icon/80 rounded-full">
+                        <FileUp className="size-full text-accent/50" />
                         </div>
                         <div className="font-semibold p-1">
                         {placeholder}
                         </div>
-                        <div className="text-xs text-gray-400">
+                        <div className="text-xs text-muted tracking-[0.075em]">
                         DROP IMAGE OR BROWSE
                         </div>
                         <input
