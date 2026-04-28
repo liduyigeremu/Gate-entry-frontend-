@@ -7,10 +7,10 @@ import { usePathname } from "next/navigation";
 const AdminHeader = () => {
   const currentPath = usePathname();
   const searchPlaceholder = [
-   { page: "/Dashboard", text: "Search audit logs..." },
-   { page: "/LaptopRequests", text: "Search registrations..." },
-   { page: "/GuardManagement", text: "Search guards by name, role or gate assignment..." },
-   { page: "/MovementLogs", text: "Search by Deivce ID..."}
+   { page: "/", text: "Search audit logs..." },
+   { page: "/", text: "Search registrations..." },
+   { page: "/guard-management", text: "Search guards by name, role or gate assignment..." },
+   { page: "/", text: "Search by Deivce ID..."}
   ];
   const currentSearchPlaceholder = searchPlaceholder.find(item => item.page === currentPath)?.text;
   const userName = "Admin";

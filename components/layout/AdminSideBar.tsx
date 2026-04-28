@@ -14,16 +14,16 @@ const AdminSideBar = () => {
     const navLinks = [
         { title: 'Dashboard', href: '/', icon: LayoutDashboard },
         { title: 'Laptop Requests', href: '/', icon: Laptop },
-        { title: 'Guard Management', href: '/GuardManagement', icon: Shield },
+        { title: 'Guard Management', href: '/guard-management', icon: Shield },
         { title: 'Movement Logs', href: '/', icon: ArrowRightLeft },
     ];
 
     return (
         <aside className="bg-card-side
-        flex flex-col h-full min-w-55 p-3 col-start-1 col-end-2 row-start-1 row-end-3 duration-300
+        flex flex-col h-full min-w-55 col-start-1 col-end-2 row-start-1 row-end-3 duration-300
         lg:min-w-75">
 
-            <h1 className="text-2xl text-accent font-bold ">
+            <h1 className="text-2xl text-accent font-bold p-3">
                 Device Entry Portal
             </h1>
 
@@ -36,9 +36,11 @@ const AdminSideBar = () => {
 
                     return (
                         <Link key={link.title} href={link.href}
-                        className={`text-muted font-semibold flex items-center w-full p-3
+                        className={`text-muted font-semibold relative flex items-center w-full p-3 px-6
                         hover:text-accent hover:font-bold active:opacity-60
-                        ${isActive && "bg-accent text-white rounded-4xl shadow-button pointer-events-none"}`}>
+                        ${isActive && "text-white bg-accent bg-linear-to-r from-black/25 to-accent rounded-sm shadow-button pointer-events-none"}`}>
+                            {isActive
+                            && <div className="absolute bg-accent left-0 w-2 h-full rounded-4xl"/>}
                             <CurrentIcon className="size-5" />
                             <span className="pl-3">{link.title}</span>
                         </Link>
