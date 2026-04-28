@@ -5,6 +5,7 @@ SignUpForm component - client side
 */
 
 import { useForm } from "react-hook-form";
+import { UserRound, LockKeyhole, Mail } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signupSchema, type SignupInput } from "@/schemas/signup.schema";
 import SubmitBtn from "@/components/ui/SubmitBtn";
@@ -37,14 +38,22 @@ const SignUpForm = () => {
                 Full Name
             </label>
 
-            <input {...register("fullname")}
-            id="fullname"
-            type="text"
-            placeholder="Your full name"           
-            className="name-input
-            bg-input-auth flex w-full p-3 mb-2 border-2 border-input-auth rounded-md placeholder-placeholder
-            focus:outline-none focus:border-input-auth/50 focus:bg-input-auth/50"
-            />
+            <div className="relative flex w-full mb-2 items-center">
+                <UserRound className="absolute left-2 text-auth-icon size-5
+                md:left-4
+                lg:left-6"/>
+                <input {...register("fullname")}
+                id="fullname"
+                type="text"
+                placeholder="Your full name"           
+                className="email-input
+                bg-input-auth flex w-full p-3 pl-8 border-2 border-input-auth rounded-md placeholder-placeholder
+                focus:outline-none focus:border-input-auth/50 focus:bg-input-auth/50
+                md:pl-12
+                lg:pl-14"
+                />
+            </div>
+            
             {errors.fullname
             && <div className="text-red-500 text-sm w-full">
                     {errors.fullname.message}
@@ -58,14 +67,23 @@ const SignUpForm = () => {
                 Email
             </label>
 
-            <input {...register("email")}
-            id="email"
-            type="email"
-            placeholder="Your email address"
-            className="email-input
-            bg-input-auth flex w-full p-3 mb-2 border-2 border-input-auth rounded-md placeholder-placeholder
-            focus:outline-none focus:border-input-auth/50 focus:bg-input-auth/50"
-            />
+            <div className="relative flex w-full mb-2 items-center">
+                <Mail className="absolute left-2 text-auth-icon size-5
+                md:left-4
+                lg:left-6"
+                />
+                <input {...register("email")}
+                id="email"
+                type="email"
+                placeholder="Your email address"
+                className="email-input
+                bg-input-auth flex w-full p-3 pl-8 border-2 border-input-auth rounded-md placeholder-placeholder
+                focus:outline-none focus:border-input-auth/50 focus:bg-input-auth/50
+                md:pl-12
+                lg:pl-14"
+                />
+            </div>
+            
             {errors.email
             && <div className="text-red-500 text-sm w-full">
                     {errors.email.message}
@@ -80,14 +98,14 @@ const SignUpForm = () => {
                     <label
                     htmlFor="password"
                     className="password-label
-                    text-sm flex w-1/2 py-2 label">
+                    text-sm flex w-1/2 py-2 mr-2 label">
                         Password
                     </label>
 
                     <label 
                     htmlFor="confirmPassword"
                     className="confirm-password-label
-                    text-sm flex w-1/2 py-2 label">
+                    text-sm flex w-1/2 py-2 ml-2 label">
                         Confirm Password
                     </label>
 
@@ -95,15 +113,25 @@ const SignUpForm = () => {
 
                 <div className="flex w-full">
 
-                    <div className="flex flex-col w-1/2 mr-3">
-                        <input {...register("password")}
-                        id="password"
-                        type="password"
-                        placeholder="Min. 8 characters"
-                        className="password-input
-                        bg-input-auth flex w-full p-3 mb-2 border-2 border-input-auth rounded-md placeholder-placeholder
-            focus:outline-none focus:border-input-auth/50 focus:bg-input-auth/50"
-                        />
+                    <div className="flex flex-col w-1/2 mr-2">
+
+                        <div className="relative flex w-full mb-2 items-center">
+                            <LockKeyhole className="absolute left-2 text-auth-icon size-5
+                            md:left-4
+                            lg:left-6"
+                            />
+                            <input {...register("password")}
+                            id="password"
+                            type="password"
+                            placeholder="Min. 8 characters"
+                            className="email-input
+                            bg-input-auth flex w-full p-3 pl-8 border-2 border-input-auth rounded-md placeholder-placeholder
+                            focus:outline-none focus:border-input-auth/50 focus:bg-input-auth/50
+                            md:pl-12
+                            lg:pl-14"
+                            />
+                        </div>
+                        
                         {errors.password
                         && <div className="text-red-500 text-sm w-full">
                                 {errors.password.message}
@@ -111,15 +139,25 @@ const SignUpForm = () => {
                             }
                     </div>
                     
-                    <div className="flex flex-col w-1/2 mr-3">
-                        <input {...register("confirmPassword")}
-                        id="confirmPassword"
-                        type="password"
-                        placeholder="Min. 8 characters"
-                        className="confirm-password-input
-                        bg-input-auth flex w-full p-3 mb-2 border-2 border-input-auth rounded-md placeholder-placeholder
-                        focus:outline-none focus:border-input-auth/50 focus:bg-input-auth/50"
-                        />
+                    <div className="flex flex-col w-1/2 ml-2">
+                    
+                        <div className="relative flex w-full mb-2 items-center">
+                            <LockKeyhole className="absolute left-2 text-auth-icon size-5
+                            md:left-4
+                            lg:left-6"
+                            />
+                            <input {...register("confirmPassword")}
+                            id="confirmPassword"
+                            type="password"
+                            placeholder="Min. 8 characters"
+                            className="email-input
+                            bg-input-auth flex w-full p-3 pl-8 border-2 border-input-auth rounded-md placeholder-placeholder
+                            focus:outline-none focus:border-input-auth/50 focus:bg-input-auth/50
+                            md:pl-12
+                            lg:pl-14"
+                            />
+                        </div>
+                        
                         {!errors.password && errors.confirmPassword
                             && <div className="text-red-500 text-sm w-full">
                                     {errors.confirmPassword.message}
