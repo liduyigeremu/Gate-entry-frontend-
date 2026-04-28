@@ -8,7 +8,7 @@ const AdminHeader = () => {
   const currentPath = usePathname();
   const searchPlaceholder = [
    { page: "/", text: "Search audit logs..." },
-   { page: "/", text: "Search registrations..." },
+   { page: "/device-request", text: "Search registrations..." },
    { page: "/guard-management", text: "Search guards by name, role or gate assignment..." },
    { page: "/", text: "Search by Deivce ID..."}
   ];

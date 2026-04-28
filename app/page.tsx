@@ -30,7 +30,10 @@ export default function Home() {
       </Link><br />
 
       <label className="font-bold">admin pages</label><br />
-      <Link href={'/guard-management'}>
+      <Link href={'/device-request'}>
+        device-request
+      </Link><br />
+      <Link href={'/device-request'}>
         guard-management
       </Link><br />
  
