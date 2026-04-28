@@ -2,7 +2,7 @@
 "use client";
 
 import { X } from "lucide-react";
-import { useState, ChangeEvent, FormEvent } from "react";
+import { useState, ChangeEvent, FormEvent, useEffect } from "react";
 
 interface RegisterFormData {
   gate_name: string;
@@ -32,6 +32,13 @@ export default function RegisterGateModal({ open, setOpen, onGateAdded }: Regist
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<FormErrors>({});
   const [serverError, setServerError] = useState<string | null>(null);
+
+  // Reset form when modal opens
+  useEffect(() => {
+    if (open) {
+      handleReset();
+    }
+  }, [open]);
 
   if (!open) return null;
 
@@ -99,38 +106,62 @@ export default function RegisterGateModal({ open, setOpen, onGateAdded }: Regist
       return;
     }
     
-    console.log("=== Registering New Gate ===");
-    console.log("Gate Name:", formData.gate_name);
-    console.log("Location:", formData.location);
-    console.log("Description:", formData.description);
-    console.log("============================");
+    const requestBody = {
+      gate_name: formData.gate_name,
+      location: formData.location,
+      description: formData.description || ""
+    };
     
     try {
-      // Actual Go backend API call
       const response = await fetch("http://localhost:8080/api/v1/gates", {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",
           "Authorization": `Bearer ${token}`
         },
-        body: JSON.stringify({
-          gate_name: formData.gate_name,
-          location: formData.location,
-          description: formData.description || "" // Send empty string if not provided
-        }),
+        body: JSON.stringify(requestBody),
       });
       
-      const result = await response.json();
+      // Try to parse the response body
+      let result;
+      const responseText = await response.text();
       
-      if (!response.ok) {
-        throw new Error(result.message || result.error || "Failed to register gate");
+      try {
+        result = responseText ? JSON.parse(responseText) : {};
+      } catch (parseError) {
+        result = { message: responseText || "Unknown error occurred" };
       }
       
-      console.log("✅ Gate registered successfully:", result);
+      if (!response.ok) {
+        // Extract detailed error message from backend response
+        let errorMessage = "";
+        
+        if (result.error) {
+          if (typeof result.error === 'string') {
+            errorMessage = result.error;
+          } else if (result.error.details) {
+            errorMessage = result.error.details;
+          } else if (result.error.message) {
+            errorMessage = result.error.message;
+          }
+        } else if (result.message) {
+          errorMessage = result.message;
+        }
+        
+        // Handle specific status codes
+        if (response.status === 401) {
+          throw new Error("Authentication failed. Please log in again.");
+        } else if (response.status === 409) {
+          throw new Error("A gate with this name already exists.");
+        } else if (response.status === 500) {
+          throw new Error(errorMessage || "Server error creating gate. Please check backend logs for details.");
+        } else {
+          throw new Error(errorMessage || `Failed to register gate (Status: ${response.status})`);
+        }
+      }
       
-      // Call the onGateAdded callback to refresh the data
+      // Refresh the gate list only on success
       if (onGateAdded) {
-        console.log("🔄 Refreshing gate list...");
         await onGateAdded();
       }
       
@@ -139,7 +170,7 @@ export default function RegisterGateModal({ open, setOpen, onGateAdded }: Regist
       setOpen(false);
       
     } catch (error: any) {
-      console.error("❌ Registration error:", error);
+      console.error("Registration error:", error);
       setServerError(error.message || "Failed to register gate. Please try again.");
     } finally {
       setIsSubmitting(false);
@@ -154,6 +185,7 @@ export default function RegisterGateModal({ open, setOpen, onGateAdded }: Regist
     });
     setErrors({});
     setServerError(null);
+    setIsSubmitting(false);
   };
 
   const handleClose = () => {
