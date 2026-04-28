@@ -14,8 +14,8 @@ const AdminSideBar = () => {
     const navLinks = [
         { title: 'Dashboard', href: '/', icon: LayoutDashboard },
         { title: 'Laptop Requests', href: '/', icon: Laptop },
-        { title: 'Guard Management', href: '/', icon: Shield },
-        { title: 'Movement Logs', href: '/GuardManagement', icon: ArrowRightLeft },
+        { title: 'Guard Management', href: '/GuardManagement', icon: Shield },
+        { title: 'Movement Logs', href: '/', icon: ArrowRightLeft },
     ];
 
     return (

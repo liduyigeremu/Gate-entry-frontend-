@@ -1,4 +1,8 @@
-import ResetPasswordBox from '@/components/ResetPasswordBox';
+/*
+reset page - server side
+*/
+
+import ResetPasswordBox from '@/components/auth/ResetPasswordBox';
 
 const page = () => {
   return (

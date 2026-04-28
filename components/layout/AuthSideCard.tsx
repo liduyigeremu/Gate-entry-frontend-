@@ -1,11 +1,11 @@
 /*
-SideinfoBox component - server side
+AuthSideCard component - server side
 */
 
 import Image from "next/image";
 import sidePic from "@/public/images/sideinfo-box.jpeg";
 
-const SideInfoCard = () => {
+const AuthSideCard = () => {
   return (
     <div className="hidden-left-side
     hidden w-1/2 h-full p-5 items-center justify-end
@@ -41,4 +41,4 @@ const SideInfoCard = () => {
   )
 }
 
-export default SideInfoCard;
+export default AuthSideCard;

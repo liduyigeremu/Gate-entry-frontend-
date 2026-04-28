@@ -1,7 +1,7 @@
 'use client'
 
 /*
-NavBar component - client side
+EmployeeNavBar component - client side
 */
 
 import Link from "next/link";
@@ -9,7 +9,7 @@ import { Bell } from "lucide-react";
 import { CircleQuestionMark, CircleUserRound } from "lucide-react";
 import { usePathname } from "next/navigation";
 
-const NavBar = () => {
+const EmployeeNavBar = () => {
     const currentPath = usePathname();
     const navLinks = [
         { title: 'Status', href: '/status' },
@@ -70,4 +70,4 @@ const NavBar = () => {
   )
 }
 
-export default NavBar;
+export default EmployeeNavBar;

@@ -27,7 +27,7 @@ const SignUpBox = () => {
             flex py-5 justify-center">
                 <div className="profile-icon
                 bg-input-auth flex size-14 items-center justify-center rounded-full">
-                    <CircleUserRound className="size-4/5 text-user-icon stroke-1" />
+                    <CircleUserRound className="size-4/5 text-auth-icon stroke-1" />
                 </div>
             </div>
 

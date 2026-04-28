@@ -59,8 +59,8 @@ Imported two font styles, Manrope and Datatype
   --shadow-button: 0 10px 15px -3px rgb(135 47 137 / 0.3);
   --shadow-card: 0 20px 50px 0 rgb(163 73 164);
 
-  /*user icon color*/
-  --color-user-icon: #82727f;
+  /*auth icon color*/
+  --color-auth-icon: #82727f;
 }
 
 @utility label {

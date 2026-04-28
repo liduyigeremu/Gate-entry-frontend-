@@ -1,4 +1,4 @@
-import NavBar from '@/components/layout/NavBar';
+import EmployeeNavBar from '@/components/layout/EmployeeNavBar';
 
 // @ts-expect-error(children)
 export default function EmployeeLayout({ children }) {
@@ -8,7 +8,7 @@ export default function EmployeeLayout({ children }) {
       
       <div className="flex w-full h-15 justify-center
       lg:mt-4">
-        <NavBar />
+        <EmployeeNavBar />
       </div>
       
       <main className="w-full h-full overflow-y-auto">
