@@ -30,6 +30,9 @@ export default function Home() {
       </Link><br />
 
       <label className="font-bold">admin pages</label><br />
+      <Link href={'/dashboard'}>
+        dashboard
+      </Link><br />
       <Link href={'/device-request'}>
         device-request
       </Link><br />
