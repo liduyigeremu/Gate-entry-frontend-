@@ -15,7 +15,7 @@ const AdminSideBar = () => {
         { title: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
         { title: 'Laptop Requests', href: '/device-request', icon: Laptop },
         { title: 'Guard Management', href: '/guard-management', icon: Shield },
-        { title: 'Movement Logs', href: '/', icon: ArrowRightLeft },
+        { title: 'Movement Logs', href: '/movement-logs', icon: ArrowRightLeft },
     ];
 
     return (
