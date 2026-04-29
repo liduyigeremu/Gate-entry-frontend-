@@ -10,7 +10,7 @@ const AdminHeader = () => {
    { page: "/dashboard", text: "Search audit logs..." },
    { page: "/device-request", text: "Search registrations..." },
    { page: "/guard-management", text: "Search guards by name, role or gate assignment..." },
-   { page: "/", text: "Search by Deivce ID..."}
+   { page: "/movement-logs", text: "Search by Deivce ID..."}
   ];
   const currentSearchPlaceholder = searchPlaceholder.find(item => item.page === currentPath)?.text;
   const userName = "Admin";

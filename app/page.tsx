@@ -36,8 +36,12 @@ export default function Home() {
       <Link href={'/device-request'}>
         device-request
       </Link><br />
-      <Link href={'/device-request'}>
+      <Link href={'/guard-management'}>
         guard-management
+      </Link><br />
+
+      <Link href={'/movement-logs'}>
+        movement-logs
       </Link><br />
  
     </div>
