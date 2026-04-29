@@ -5,21 +5,25 @@ NextAuth
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { NextAuthOptions } from "next-auth";
+import { apiFetch } from "@/lib/api";
 
 declare module 'next-auth' {
     interface Session {
         accessToken?: string;
         email?: string;
+        role: string;
     }
     interface User {
         accessToken?: string;
         email?: string;
+        role: string;
     }
 }
 declare module 'next-auth/jwt' {
     interface JWT {
         accessToken?: string;
         email?: string;
+        role: string;
     }
 }
 
@@ -34,7 +38,7 @@ export const authOptions: NextAuthOptions = {
             async authorize(credentials) {
                 console.log('Login attempt...');
 
-                const response = await fetch('',
+                const response = await apiFetch('/auth/login',
                     {
                         method: 'POST',
                         headers: {
@@ -46,13 +50,16 @@ export const authOptions: NextAuthOptions = {
                         }),
                     });
 
-                const user = await response.json();
+                const responseData = await response.json();
 
-                if(response.ok && user) {
+                if(response.ok && responseData?.success && responseData?.data) {
+                    const { token, user } = responseData.data;
+
                     return {
-                        id: user.id.toString(),
+                        id: user.id,
                         email: user.email,
-                        accessToken: user.accessToken,
+                        role: user.role,
+                        accessToken: token,
                     }
                 }
                 return null;
@@ -69,6 +76,7 @@ export const authOptions: NextAuthOptions = {
             if(user) {
                 token.accessToken = user.accessToken;
                 token.email = user.email;
+                token.role = user.role;
             }
             return token;
         },
@@ -76,6 +84,7 @@ export const authOptions: NextAuthOptions = {
         async session ({ session, token }) {
             session.accessToken = token.accessToken;
             session.email = token.email;
+            session.role = token.role;
             return session;
         }
     }
