@@ -1,59 +1,52 @@
-'use client'
+'use client';
 
-import { Mail, IdCard, Laptop, Trash2 } from "lucide-react";
+import { Mail, IdCard, Laptop, Trash2, Camera } from "lucide-react";
 import { useState, useRef } from "react";
-import { Camera } from "lucide-react"; 
 
 type DeviceCardProps = {
   status: string;
-  lastActive: string;
   os: string;
 };
 
-function DeviceCard({ status, lastActive, os }: DeviceCardProps) {
+function DeviceCard({ status, os }: DeviceCardProps) {
   const isActive = status === "ACTIVE";
 
   return (
-    <div className="bg-white rounded-4xl shadow-md p-6 relative">
+    <div className="bg-card-muted rounded-[30px] p-6 relative border border-[#f2ebf5]">
 
-      {/* Status */}
+      {/* Status Badge */}
       <span
-        className={`absolute top-4 right-4 text-xs px-3 py-1 rounded-full font-semibold ${
+        className={`absolute top-6 right-6 text-[11px] font-bold px-4 py-1 rounded-full ${
           isActive
-            ? "bg-green-100 text-green-700"
-            : "bg-gray-100 text-gray-500"
+            ? "bg-approved text-[#2d3a00]"
+            : "bg-card-muted text-muted"
         }`}
       >
         {status}
       </span>
 
-      {/* Icon */}
-      <div className="w-12 h-12 bg-fuchsia-50 rounded-2xl flex items-center justify-center mb-4">
-        <Laptop className="text-primary" size={20} />
+      {/* Device Icon */}
+      <div className="w-14 h-14 rounded-[18px] bg-icon flex items-center justify-center mb-6">
+        <Laptop size={22} className="text-primary" />
       </div>
 
-      {/* Title */}
-      <h3 className="font-semibold text-gray-800 text-lg">
+      {/* Device Name */}
+      <h3 className="text-[30px] font-semibold text-foreground leading-tight">
         MacBook Pro 16"
       </h3>
 
-      {/* Last Active */}
-      <p className="text-sm text-gray-500 mt-1">
-        Last active: {lastActive}
-      </p>
-
       {/* Divider */}
-      <div className="border-t border-gray-200 my-4"></div>
+      <div className="border-t border-[#e8e0eb] my-8" />
 
-      {/* Bottom */}
-      <div className="flex justify-between items-center">
-        <p className="text-xs text-gray-400">
-          OS: <span className="text-primary font-medium">{os}</span>
+      {/* Bottom Row */}
+      <div className="flex items-center justify-between">
+        <p className="text-[12px] font-semibold uppercase tracking-wide text-[#94a3b8]">
+          OS: <span className="text-[#94a3b8]">{os}</span>
         </p>
 
         <Trash2
-          size={16}
-          className="text-gray-400 hover:text-red-400 cursor-pointer"
+          size={14}
+          className="text-[#94a3b8] cursor-pointer hover:text-red-400 transition"
         />
       </div>
     </div>
@@ -63,147 +56,167 @@ function DeviceCard({ status, lastActive, os }: DeviceCardProps) {
 export default function EmployeeProfile() {
   const [image, setImage] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  const file = e.target.files?.[0];
-  if (file) {
-    const imageUrl = URL.createObjectURL(file);
-    setImage(imageUrl);
-  }
-};
+
+  const handleImageChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const file = e.target.files?.[0];
+
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
+      setImage(imageUrl);
+    }
+  };
+
   return (
-    
-    <div className="w-screen min-h-screen bg-primary-bg px-12 py-8">
+    <div className="min-h-screen w-full bg-background px-6 md:px-10 py-8">
 
-      {/* Header */}
-      <h1 className="text-4xl font-bold text-gray-800">
-        Employee Profile
-      </h1>
-      <p className="text-gray-500 mt-2">
-        Manage your identity and secured access endpoints.
-      </p>
+      {/* PAGE HEADER */}
+      <div>
+        <h1 className="text-[56px] font-bold text-foreground leading-none">
+          Employee Profile
+        </h1>
 
-      {/* Layout */}
-     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+        <p className="text-muted text-[16px] mt-3">
+          Manage your identity and secured access endpoints.
+        </p>
+      </div>
+
+      {/* MAIN LAYOUT */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-10">
 
         {/* LEFT SIDE */}
-        <div className="col-span-1">
-          <div className="bg-white rounded-4xl shadow-md p-8 relative overflow-hidden">
+        <div className="lg:col-span-1">
+          <div className="bg-card rounded-[34px] p-8 relative overflow-hidden border border-[#f2ebf5] min-h-[560px]">
 
-            {/* Decorative shape */}
-            <div className="absolute top-0 right-0 w-32 h-32 bg-fuchsia-50 rounded-bl-[100px]" />
+            {/* Decorative top-right shape */}
+            <div className="absolute top-0 right-0 w-[120px] h-[85px] bg-card-muted rounded-bl-[80px]" />
 
-          <div className="flex justify-center mt-4">
-  <div className="relative w-28 h-28">
+            {/* Profile Image */}
+            <div className="flex justify-center mt-2">
+              <div className="relative w-[130px] h-[130px]">
 
-    {/* Profile Image */}
-    <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-primary bg-gray-200 flex items-center justify-center">
-      {image ? (
-        <img
-          src={image}
-          alt="Profile"
-          className="w-full h-full object-cover"
-        />
-      ) : (
-        <span className="text-xl font-bold text-white bg-orange-400 w-full h-full flex items-center justify-center">
-          EA
-        </span>
-      )}
-    </div>
+                {/* Outer Ring */}
+                <div className="w-full h-full rounded-full border-[4px] border-primary/65 flex items-center justify-center">
 
-    {/* Change button */}
-<button
-  type="button"
-  onClick={() => fileInputRef.current?.click()}
-  className="absolute bottom-0 right-0 bg-primary p-2 rounded-full shadow-md border border-white hover:opacity-90"
->
-  <Camera size={14} className="text-white" />
-</button>
-    {/* Hidden input */}
-    <input
-      type="file"
-      ref={fileInputRef}
-      accept="image/*"
-      onChange={handleImageChange}
-      className="hidden"
-    />
-  </div>
-</div>
+                  {/* Inner Image */}
+                  <div className="w-[112px] h-[112px] rounded-full overflow-hidden bg-orange-400 flex items-center justify-center">
+                    {image ? (
+                      <img
+                        src={image}
+                        alt="Profile"
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <span className="text-white font-bold text-[28px]">
+                        EA
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                {/* Camera Button */}
+                <button
+                  type="button"
+                  onClick={() => fileInputRef.current?.click()}
+                  className="absolute bottom-2 right-0 w-9 h-9 rounded-full bg-primary flex items-center justify-center border-2 border-white shadow-md hover:opacity-90 transition"
+                >
+                  <Camera size={15} className="text-white" />
+                </button>
+
+                {/* Hidden Input */}
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  className="hidden"
+                />
+              </div>
+            </div>
 
             {/* Name */}
-            <h2 className="text-2xl font-semibold text-center mt-4 text-gray-800">
+            <h2 className="text-center text-[24px] font-bold text-foreground mt-6">
               Edini Amare
             </h2>
-            <p className="text-center text-primary text-xs mt-1 tracking-wider">
+
+            <p className="text-center text-primary text-[14px] font-semibold tracking-wide mt-1">
               IS TRAINEE
             </p>
 
-            {/* Email */}
-            <div className="bg-fuchsia-50 rounded-4xl px-5 py-4 mt-6">
-              <div className="flex items-center gap-3">
-                <Mail size={18} className="text-primary" />
+            {/* EMAIL CARD */}
+            <div className="bg-card-muted rounded-[28px] px-5 py-4 mt-9">
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center">
+                  <Mail size={20} className="text-primary" />
+                </div>
+
                 <div>
-                  <p className="text-xs text-gray-500 uppercase tracking-wider">
+                  <p className="text-[11px] font-bold uppercase tracking-[2px] text-muted">
                     Email Address
                   </p>
-                  <p className="text-sm text-gray-800 break-all">
-  Ediniamare@cbe.com.et
-</p>
+
+                  <p className="text-[18px] text-foreground font-medium break-all">
+                    Ediniamare@cbe.com.et
+                  </p>
                 </div>
               </div>
             </div>
 
-            {/* Employee ID */}
-            <div className="bg-fuchsia-50 rounded-4xl px-5 py-4 mt-4">
-              <div className="flex items-center gap-3">
-                <IdCard size={18} className="text-primary" />
+            {/* EMPLOYEE ID CARD */}
+            <div className="bg-card-muted rounded-[28px] px-5 py-4 mt-5">
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center">
+                  <IdCard size={20} className="text-primary" />
+                </div>
+
                 <div>
-                  <p className="text-xs text-gray-500 uppercase tracking-wider">
+                  <p className="text-[11px] font-bold uppercase tracking-[2px] text-muted">
                     Employee ID
                   </p>
-                  <p className="text-sm text-gray-800 break-all">
-  CBE001214
-</p>
+
+                  <p className="text-[18px] text-foreground font-medium">
+                    CBE001214
+                  </p>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
 
         {/* RIGHT SIDE */}
-        <div className="col-span-2">
+        <div className="lg:col-span-2">
 
-          {/* Header */}
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-2">
-              <Laptop className="text-primary" size={18} />
-              <h2 className="text-lg font-semibold text-gray-800">
+          {/* Section Header */}
+          <div className="flex items-center justify-between">
+
+            <div className="flex items-center gap-3">
+              <Laptop size={18} className="text-primary" />
+
+              <h2 className="text-[20px] font-bold text-foreground">
                 Registered Devices
               </h2>
             </div>
 
-            <span className="text-primary text-sm cursor-pointer hover:opacity-70">
+            <button className="text-primary font-semibold text-[16px] hover:opacity-80 transition">
               Manage All
-            </span>
+            </button>
           </div>
 
-          {/* Cards */}
-          <div className="grid grid-cols-2 gap-6 mt-6">
+          {/* Device Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-7">
 
             <DeviceCard
               status="ACTIVE"
-              lastActive="2 minutes ago"
               os="VENTURA 13.4"
             />
 
             <DeviceCard
-              status="STANDBY"
-              lastActive="4 hours ago"
+              status="ACTIVE"
               os="IOS 17.1"
             />
 
           </div>
-
         </div>
       </div>
     </div>
