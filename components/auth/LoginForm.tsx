@@ -10,8 +10,17 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema, type LoginInput } from "@/schemas/login.schema";
 import SubmitBtn from "@/components/ui/SubmitBtn";
+import { signIn, useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
+    const [serverError, setServerError] = useState("");
+    const router = useRouter();
+    const [pendingLogin, setPendingLogin] = useState(false);
+    const { data: session } = useSession();
+    const role = session?.user?.role;
+
     const {
         register,
         handleSubmit,
@@ -23,9 +32,29 @@ const LoginForm = () => {
     });
 
     const onSubmit = async (data: LoginInput) => {
-        
-    }
+        setServerError("");
 
+        const result = await signIn('credentials', {
+            redirect: false,
+            email: data.email,
+            password: data.password,
+        });
+
+        if(result?.error) {
+            setServerError("Invalid email or password");
+            console.log(serverError);
+        } else {
+            setPendingLogin(true);
+        }
+    };
+
+    useEffect(() => {
+        if(pendingLogin && role) {
+            if(role === 'employee') router.push('/employee');
+            else if(role === 'admin') router.push('/admin');
+        }
+    }, [role, pendingLogin, router]);
+    
     return (
         <form noValidate
         onSubmit={handleSubmit(onSubmit)}
@@ -88,6 +117,12 @@ const LoginForm = () => {
                 && <div className="text-red-500 text-sm w-full">
                         {errors.password.message}
                     </div>
+            }
+            {serverError
+                &&  <div className="text-red-500 text-sm w-full">
+                        {serverError}
+                    </div>
+                
             }
 
                 <div className="flex w-full justify-end">

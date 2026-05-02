@@ -12,10 +12,10 @@ const AdminSideBar = () => {
     const currentPath = usePathname();
 
     const navLinks = [
-        { title: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
-        { title: 'Laptop Requests', href: '/device-request', icon: Laptop },
-        { title: 'Guard Management', href: '/guard-management', icon: Shield },
-        { title: 'Movement Logs', href: '/movement-logs', icon: ArrowRightLeft },
+        { title: 'Dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
+        { title: 'Laptop Requests', href: '/admin/device-request', icon: Laptop },
+        { title: 'Guard Management', href: '/admin/guard-management', icon: Shield },
+        { title: 'Movement Logs', href: '/admin/movement-logs', icon: ArrowRightLeft },
     ];
 
     return (

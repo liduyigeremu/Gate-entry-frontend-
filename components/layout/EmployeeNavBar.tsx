@@ -12,9 +12,9 @@ import { usePathname } from "next/navigation";
 const EmployeeNavBar = () => {
     const currentPath = usePathname();
     const navLinks = [
-        { title: 'Status', href: '/status' },
-        { title: 'Devices', href: '/devices' },
-        { title: 'Profile', href: '/profile' },
+        { title: 'Status', href: '/employee/status' },
+        { title: 'Devices', href: '/employee/devices' },
+        { title: 'Profile', href: '/employee/profile' },
     ];
 
   return (

@@ -5,8 +5,22 @@ LoginBox component - server side
 import Link from "next/link";
 import LoginForm from "./LoginForm";
 import { CircleUserRound } from "lucide-react";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
-const LoginBox = () => {
+const LoginBox = async () => {
+  const session = await getServerSession(authOptions);
+  const role = session?.user.role;
+
+  if(session) {
+    if(role === 'employee') {
+      redirect('/employee');
+    } else if(role === 'admin') {
+      redirect('/admin');
+    }
+  }
+
   return (
     <div className="main-right-side
     flex w-full h-full p-5 items-center justify-center
