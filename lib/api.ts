@@ -1,5 +1,5 @@
 /*
-api.ts - automatically adds base url to fetch function
+api.ts - apiFetch - automatically adds base url to fetch function
 */
 
 const BASE_URL = process.env.API_BASE_URL;
