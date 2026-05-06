@@ -101,8 +101,6 @@ export const authOptions: NextAuthOptions = {
                 password: { label: 'password', type: 'password'},
             },
             async authorize(credentials) {
-                console.log('Login attempt...');
-
                 const response = await apiFetch('/auth/login',
                     {
                         method: 'POST',
@@ -116,8 +114,6 @@ export const authOptions: NextAuthOptions = {
                     });
 
                 const responseData = await response.json();
-
-                console.log(responseData);
 
                 if(response.ok && responseData?.success && responseData?.data) {
                     const {
@@ -134,7 +130,7 @@ export const authOptions: NextAuthOptions = {
                             },
                         },
                     } = responseData;
-
+                    
                     return {
                         id: userId,
                         name: fullName,

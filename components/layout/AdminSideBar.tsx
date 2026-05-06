@@ -7,6 +7,7 @@ AdminSideBar component - client side
 import Link from "next/link";
 import { SquareArrowRightExit, LayoutDashboard, Laptop, Shield, ArrowRightLeft } from "lucide-react";
 import { usePathname } from "next/navigation";
+import { signOut } from "next-auth/react";
 
 const AdminSideBar = () => {
     const currentPath = usePathname();
@@ -50,12 +51,9 @@ const AdminSideBar = () => {
 
             </nav>
 
-            {/*
-            Sign out button
-            logic for clearing cookies will be called here
-            */}
             <div className="text-sm flex flex-col h-full p-4 justify-end bg-amber-20">
                 <button
+                onClick={() => signOut()}
                 className="text-muted font-bold flex items-center justify-start
                 hover:text-accent active:opacity-60">
                     <SquareArrowRightExit className="size-5" />
