@@ -10,8 +10,14 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema, type LoginInput } from "@/schemas/login.schema";
 import SubmitBtn from "@/components/ui/SubmitBtn";
+import { getSession, signIn, signOut } from "next-auth/react";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
+    const [serverError, setServerError] = useState("");
+    const router = useRouter();
+
     const {
         register,
         handleSubmit,
@@ -23,9 +29,39 @@ const LoginForm = () => {
     });
 
     const onSubmit = async (data: LoginInput) => {
-        
-    }
+        setServerError("");
 
+        const result = await signIn('credentials', {
+            redirect: false,
+            email: data.email,
+            password: data.password,
+        });
+
+        if(result?.error) {
+            setServerError("Invalid email or password");
+            return;
+        }
+
+        const session = await getSession();
+
+        if(!session) {
+            setServerError("An unexpected error occurred. Please try again.");
+            return;
+        }
+
+        const role = session.user.role;
+
+        if(role === 'employee') {
+            router.push('/employee');
+        } else if(role === 'admin') {
+            router.push('/admin');
+        } else {
+            setServerError("Your account role is not supported. Please contact your administrator.");
+            await signOut({ redirect: false });
+        }
+
+    };
+    
     return (
         <form noValidate
         onSubmit={handleSubmit(onSubmit)}
@@ -87,6 +123,11 @@ const LoginForm = () => {
             {!errors.email && errors.password
                 && <div className="text-red-500 text-sm w-full">
                         {errors.password.message}
+                    </div>
+            }
+            {serverError
+                &&  <div className="text-red-500 text-sm w-full">
+                        {serverError}
                     </div>
             }
 

@@ -19,28 +19,28 @@ export default function Home() {
       </Link><br />
 
       <label className="font-bold">employee pages</label><br />
-      <Link href={'/devices'}>
+      <Link href={'/employee/devices'}>
         devices
       </Link><br />
-      <Link href={'/profile'}>
+      <Link href={'/employee/profile'}>
         profile
       </Link><br />
-      <Link href={'/status'}>
+      <Link href={'/employee/status'}>
         status
       </Link><br />
 
       <label className="font-bold">admin pages</label><br />
-      <Link href={'/dashboard'}>
+      <Link href={'/admin/dashboard'}>
         dashboard
       </Link><br />
-      <Link href={'/device-request'}>
+      <Link href={'/admin/device-request'}>
         device-request
       </Link><br />
-      <Link href={'/guard-management'}>
+      <Link href={'/admin/guard-management'}>
         guard-management
       </Link><br />
 
-      <Link href={'/movement-logs'}>
+      <Link href={'/admin/movement-logs'}>
         movement-logs
       </Link><br />
  

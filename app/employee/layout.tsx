@@ -11,7 +11,7 @@ export default function EmployeeLayout({ children }) {
         <EmployeeNavBar />
       </div>
       
-      <main className="w-full h-full overflow-y-auto">
+      <main className="w-full h-full pt-10 overflow-y-auto">
         {children}
       </main>
       
