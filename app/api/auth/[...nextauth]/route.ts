@@ -208,7 +208,7 @@ export const authOptions: NextAuthOptions = {
                     await apiFetch('/auth/logout', {
                         method: 'POST',
                         body: JSON.stringify({
-                            refresh_token: refreshAccessToken,
+                            refresh_token: token.refreshToken,
                         }),
                     });
                 } catch(error) {
