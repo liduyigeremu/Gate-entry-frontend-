@@ -199,7 +199,24 @@ export const authOptions: NextAuthOptions = {
 
             return session;
         }
-    }
+    },
+
+    events: {
+        async signOut({ token }) {
+            if(token?.refreshToken) {
+                try {
+                    await apiFetch('/auth/logout', {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            refresh_token: refreshAccessToken,
+                        }),
+                    });
+                } catch(error) {
+                    console.error("Backend logout failed", error);
+                }
+            }
+        },
+    },
 }
 
 const handler = NextAuth(authOptions);
